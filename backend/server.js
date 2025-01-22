@@ -4,6 +4,7 @@ import itemsRouter from "./routes/items.js";
 import categoriesRouter from "./routes/categories.js";
 import registerRouter from "./routes/register.js";
 import loginRouter from "./routes/login.js";
+import shoppingListRouter from "./routes/shoppingList.js";
 
 await connect();
 const app = express();
@@ -13,6 +14,7 @@ app.use("/items", itemsRouter);
 app.use("/categories", categoriesRouter);
 app.use("/register", registerRouter);
 app.use("/login", loginRouter);
+app.use("/shoppinglist", shoppingListRouter);
 
 const port = 5000;
 app.listen(port, () => {
