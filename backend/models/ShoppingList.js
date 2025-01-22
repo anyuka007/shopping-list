@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import User from "./User.js";
+import Item from "./Item.js";
 
 const ShoppingListSchema = new mongoose.Schema(
     {
@@ -9,6 +10,7 @@ const ShoppingListSchema = new mongoose.Schema(
             ref: User,
             required: true,
         },
+        items: [{ type: mongoose.Schema.Types.ObjectId, ref: Item }],
     },
     { timestamps: true } // Automatically adds createdAt and updatedAt fields
 );
