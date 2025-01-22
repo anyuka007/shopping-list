@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
-export const authorization = async (req, res) => {
+export const authorization = async (req, res, next) => {
     let token;
 
     if (
@@ -11,18 +11,21 @@ export const authorization = async (req, res) => {
         try {
             // extract token from header
             token = req.headers.authorization.split(" ")[1];
+
             // verify token with decoder
-            const decoded = jwt.verify(token, process.env.JWT_Secret);
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
             // get user from token
             req.user = await User.findById(decoded.id).select("-password");
+            console.log("user", req.user);
             next();
         } catch (error) {
-            res.status(401);
-            throw new Error("Not authorized, token failed");
+            return res
+                .status(401)
+                .send(error.message || "Not authorized, token failed");
         }
     }
     if (!token) {
-        res.status(401);
-        throw new Error("Not authorised, no token");
+        return res.status(401).send("Not authorised, no token");
     }
 };

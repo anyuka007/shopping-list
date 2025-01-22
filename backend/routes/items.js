@@ -6,10 +6,11 @@ import {
     editItem,
     deleteItem,
 } from "../controllers/itemsController.js";
+import { authorization } from "../middleware/authMiddleware.js";
 
 const itemsRouter = express.Router();
 
-itemsRouter.route("/").get(getAllItems).post(addItem);
+itemsRouter.route("/").get(getAllItems).post(authorization, addItem);
 itemsRouter.route("/:id").get(getItem).patch(editItem).delete(deleteItem);
 
 export default itemsRouter;
