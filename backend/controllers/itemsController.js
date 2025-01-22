@@ -13,9 +13,30 @@ export const getItem = (req, res) => {
     res.send("Get one item");
 };
 
-export const addItem = (req, res) => {
-    console.log("test111");
-    res.send("Add item");
+export const addItem = async (req, res) => {
+    try {
+        const { name, category } = req.body;
+        if (!name || !category) {
+            return res.status(400).send("Please add all info");
+        }
+        const isItemInDB = await Item.findOne({
+            name: name.toLowerCase(),
+            category: category.toLowerCase(),
+        });
+        if (isItemInDB) {
+            return res.status(409).send("There is already such an item");
+        }
+
+        const newItem = await Item.create({
+            name: name.toLowerCase(),
+            category: category.toLowerCase(),
+        });
+        return res
+            .status(200)
+            .send(`New Item ${newItem.name} was successfuly added.`);
+    } catch (error) {
+        return res.status(500).send(error.message || "Error adding new item");
+    }
 };
 
 export const editItem = (req, res) => {
