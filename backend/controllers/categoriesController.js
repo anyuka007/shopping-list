@@ -1,6 +1,6 @@
 import Category from "../models/Category.js";
 
-export const getAllCategories = async (req, res, next) => {
+export const getAllCategories = async (req, res) => {
     try {
         const categories = await Category.find();
         return res.status(200).send(categories);
@@ -11,7 +11,7 @@ export const getAllCategories = async (req, res, next) => {
     }
 };
 
-export const getCategory = async (req, res, next) => {
+export const getCategory = async (req, res) => {
     const id = req.params.id;
     try {
         const category = await Category.findById(id);
@@ -27,7 +27,7 @@ export const getCategory = async (req, res, next) => {
     }
 };
 
-export const addCategory = async (req, res, next) => {
+export const addCategory = async (req, res) => {
     try {
         const body = req.body;
 

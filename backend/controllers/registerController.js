@@ -1,15 +1,12 @@
-import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import User from "../models/User.js";
+import { generateToken } from "./utils/generateToken.js";
 
-// Generate JWT
-const generateToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1h" });
-};
-
-export const registerUser = async (req, res, next) => {
+export const registerUser = async (req, res) => {
     try {
         const { firstName, lastName, email, password } = req.body;
+
+        // Check if all required fields are provided
         if (!firstName || !lastName || !email || !password) {
             res.status(400);
             throw new Error("Please add all fields");
@@ -32,7 +29,7 @@ export const registerUser = async (req, res, next) => {
             password: hashedPassword,
         });
         if (newUser) {
-            return res.status(201).json({
+            return res.status(200).json({
                 // _id: newUser.id,
                 firstName: newUser.firstName,
                 // lastName: newUser.lastName,
