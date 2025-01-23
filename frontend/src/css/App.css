@@ -8,6 +8,28 @@
     font-size: 62.5%;
 }
 
+#root {
+    height: 100vh;
+}
+
 body {
     font-size: 1.6rem;
+    height: 100%;
+}
+
+.whole-page {
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-container {
+    flex: 1 1 auto;
+    background-image: url("../../public/images/origami.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat; /* Ensures the image does not repeat */
+    background-attachment: fixed; /* Keeps the background image fixed during scrolling */
 }

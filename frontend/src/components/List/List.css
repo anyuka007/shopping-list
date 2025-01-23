@@ -1,0 +1,13 @@
+.list-container {
+    width: 300px;
+    height: 300px;
+    border: 1px solid black;
+}
+
+.list-name {
+    display: flex;
+}
+
+.list-item-name {
+    display: flex;
+}

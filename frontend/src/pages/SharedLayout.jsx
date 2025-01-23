@@ -1,16 +1,18 @@
 import { Outlet } from "react-router-dom";
+import Header from "../components/Header/Header";
+import Footer from "../components/Footer/Footer";
 
 const SharedLayout = () => {
     return (
-        <>
+        <div className="whole-page">
             {/* nav/header */}
-            <h2>Ich bin die zukünftige Navbar</h2>
+            <Header />
             <main className="main-container">
                 <Outlet />
             </main>
-            <h2>Ich bin der zukünftige Footer</h2>
             {/* footer */}
-        </>
+            <Footer />
+        </div>
     );
 };
 
