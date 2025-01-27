@@ -10,6 +10,10 @@
     flex-basis: 60%;
 }
 
+.start-container-img img {
+    width: 100%;
+}
+
 .start-container-text {
     width: 100%;
     flex-basis: 35%;
@@ -34,9 +38,14 @@
 }
 
 .start-container-buttons button {
-    background-color: #fffcf7;
+    /* background-color: #fffcf7; */
+    background-color: #eef0ef;
     width: 130px;
     height: 50px;
     font-size: 14px;
     margin-right: 4rem;
+}
+
+.start-container-buttons button:hover {
+    background-color: #e3e3e3;
 }

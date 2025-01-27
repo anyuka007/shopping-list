@@ -8,8 +8,8 @@ const Header = () => {
             <div className="header-left">
                 <p>Plan better, Shop Smarter</p>
             </div>
-            {/*  it is only displayed if the pathname is not "/start". */}
-            {location.pathname !== "/start" && (
+            {/*  it is only displayed if the pathname is  "/". */}
+            {location.pathname === "/" && (
                 <div className="header-right">
                     <div>UserName/optional</div>
                     <div>

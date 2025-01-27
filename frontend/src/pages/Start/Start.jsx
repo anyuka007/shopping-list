@@ -1,11 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import "../../css/Start.css";
 
 const Start = () => {
+    const navigate = useNavigate();
     return (
         <div className="start-container">
             <div className="start-container-img">
                 <img
-                    className="start-container-img"
                     src="../../../public/images/shoppingBags_1280.jpg"
                     alt="start-photo"
                 />
@@ -25,7 +26,8 @@ const Start = () => {
                 <div className="start-container-buttons">
                     <button
                         className="start-container-button"
-                        onClick={() => alert("Log in")}
+                        /* onClick={() => alert("Log in")} */
+                        onClick={() => navigate("/login")}
                     >
                         Log In
                     </button>
