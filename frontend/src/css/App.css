@@ -15,21 +15,20 @@
 body {
     font-size: 1.6rem;
     height: 100%;
+    font-family: "Roboto", serif;
+    background-color: #fffcf7;
 }
 
 .whole-page {
     height: 100%;
     width: 100%;
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
+    padding: 3rem;
 }
 
 .main-container {
     flex: 1 1 auto;
-    background-image: url("../../public/images/origami.png");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat; /* Ensures the image does not repeat */
-    background-attachment: fixed; /* Keeps the background image fixed during scrolling */
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
 }

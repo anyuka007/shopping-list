@@ -2,7 +2,8 @@ import AppProvider from "./context/AppProvider";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SharedLayout from "./pages/SharedLayout";
 import Home from "./pages/Home/Home";
-import Kontakt from "./pages/Kontakt/Kontakt";
+///import Kontakt from "./pages/Kontakt/Kontakt";
+import Start from "./pages/Start/Start";
 import NotFound from "./pages/NotFound/NotFound";
 import "./css/App.css";
 
@@ -15,7 +16,7 @@ function App() {
                         <Route path="/" element={<SharedLayout />}>
                             <Route index element={<Home />} />
                             {/* Weitere Routen hier zwischen */}
-                            <Route path="kontakt" element={<Kontakt />} />
+                            <Route path="start" element={<Start />} />
                             {/* Weitere Routen hier zwischen */}
                             <Route path="*" element={<NotFound />} />
                         </Route>

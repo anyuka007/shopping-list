@@ -1,3 +1,25 @@
+.home-container {
+    /* background-image: url("../../public/images/origami.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-attachment: fixed;*/
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.home-welcome-text {
+    text-align: center;
+}
+
+.home-welcome-text h1 {
+    margin-top: 2rem;
+}
+
+.home-welcome-text-description {
+    margin: 2rem;
+}
+
 .home-lists-container {
     display: flex;
     justify-content: space-between;
