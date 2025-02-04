@@ -8,7 +8,8 @@ const Login = () => {
             <div className="login-container-img">
                 <img
                     className="login-container-img"
-                    src="../../../public/images/pexels-lum3n-44775-1410226.jpg"
+                    /* src="../../../public/images/pexels-lum3n-44775-1410226.jpg" */
+                    src="https://images.pexels.com/photos/4210784/pexels-photo-4210784.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                     alt="start-photo"
                 />
             </div>

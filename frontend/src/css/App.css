@@ -32,3 +32,8 @@ body {
     border-top: 2px solid black;
     border-bottom: 2px solid black;
 }
+
+.form-validation-error {
+    font-size: 1.2rem;
+    color: red;
+}
