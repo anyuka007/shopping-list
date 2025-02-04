@@ -41,6 +41,7 @@ export const registerUser = async (req, res) => {
             throw new Error("Invalid user data");
         }
     } catch (error) {
+        console.log(error.message);
         return res.status(500).send(error.message || "Error adding new user");
     }
 };

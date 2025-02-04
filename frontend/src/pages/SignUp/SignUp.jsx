@@ -17,6 +17,35 @@ const SignUp = () => {
         }));
     };
 
+    const createUser = async () => {
+        const requestOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                firstName: formData.firstname,
+                lastName: formData.lastname,
+                email: formData.email,
+                password: formData.password,
+            }),
+        };
+        try {
+            const response = await fetch(
+                "http://localhost:5000/register",
+                requestOptions
+            );
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            console.log("User created successfully:", data);
+        } catch (error) {
+            console.error(
+                "There was a problem with the fetch operation:",
+                error
+            );
+        }
+    };
+
     const createUserHandler = (event) => {
         event.preventDefault();
         let errors = {};
@@ -63,6 +92,7 @@ const SignUp = () => {
 
         // Check if there are no errors
         if (Object.keys(errors).length === 0) {
+            createUser();
             alert("User is created");
             console.log(formData);
         }
