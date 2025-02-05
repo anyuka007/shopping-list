@@ -1,7 +1,16 @@
+import { useNavigate } from "react-router-dom";
 import List from "../../components/List/List";
 import "../../css/Home.css";
+import { useEffect } from "react";
 
 const Home = () => {
+    const navigate = useNavigate();
+    const token = localStorage.getItem("token");
+    useEffect(() => {
+        if (!token) {
+            navigate("/start");
+        }
+    }, []);
     return (
         <div className="home-container">
             <section className="home-welcome-text">
