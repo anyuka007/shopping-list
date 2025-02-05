@@ -23,7 +23,13 @@
 }
 
 .home-lists-container {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+    width: 80%;
     margin-top: 20px;
+    margin: 2rem auto;
+    justify-items: center;
+    align-items: center;
+    max-width: 1400px;
 }

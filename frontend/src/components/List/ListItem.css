@@ -1,0 +1,51 @@
+.list-item-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 2rem;
+    margin: 1.2rem 0;
+    background-color: #ffffff;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.list-item-container:hover {
+    background-color: #f0f0f0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.list-item-container-left {
+    display: flex;
+    align-items: center;
+}
+
+.list-item-container-left input[type="checkbox"] {
+    margin-right: 12px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.list-item-container-left p {
+    margin: 0;
+}
+
+.list-item-container-right {
+    display: flex;
+    align-items: center;
+}
+
+.list-item-container-right .list-item-icon {
+    margin-left: 1.2rem;
+    width: 2rem;
+    cursor: pointer;
+    color: #888;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.list-item-container-right .list-item-icon:hover {
+    color: #555;
+    transform: scale(1.1);
+}
