@@ -36,7 +36,12 @@ const Login = () => {
                 response.status === 401 &&
                 data.message === "Invalid credentials"
             ) {
-                alert("User is not found");
+                alert("Invalid password");
+            } else if (
+                response.status === 404 &&
+                data.message === "User not found"
+            ) {
+                alert("User not found");
             } else if (!response.ok) {
                 throw new Error("Error by login user");
             } else {

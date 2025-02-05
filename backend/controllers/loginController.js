@@ -20,6 +20,8 @@ export const loginUser = async (req, res) => {
                 firstName: user.firstName,
                 token: generateToken(user._id),
             });
+        } else if (!user) {
+            res.status(404).send({ message: "User not found" });
         } else {
             res.status(401).send({ message: "Invalid credentials" });
         }
