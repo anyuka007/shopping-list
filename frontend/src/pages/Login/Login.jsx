@@ -1,8 +1,78 @@
 import "../../css/Login.css";
-import { Mail, Eye /* , EyeOff */ } from "lucide-react";
+import { Mail, Eye, EyeOff } from "lucide-react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 const Login = () => {
+    const [formData, setFormData] = useState({});
+    const [showPassword, setShowPassword] = useState(false);
+    const [fillingErrors, setFillingErrors] = useState({});
+
+    const inputHandler = (event, property) => {
+        setFillingErrors((prevState) => ({ ...prevState, [property]: "" }));
+        setFormData((prevState) => ({
+            ...prevState,
+            [property]: event.target.value.trim(),
+        }));
+    };
+
+    const loginUser = async () => {
+        const requestOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                email: formData.email,
+                password: formData.password,
+            }),
+        };
+        try {
+            const response = await fetch(
+                "http://localhost:5000/login",
+                requestOptions
+            );
+            const data = await response.json();
+            if (
+                response.status === 401 &&
+                data.message === "Invalid credentials"
+            ) {
+                alert("User is not found");
+            } else if (!response.ok) {
+                throw new Error("Error by login user");
+            } else {
+                console.log("User is logged", data);
+            }
+        } catch (error) {
+            console.error(
+                "There was a problem with the fetch operation:",
+                error
+            );
+        }
+    };
+
+    const loginHandler = (event) => {
+        event.preventDefault();
+        let errors = {};
+
+        if (!formData.email) {
+            errors.email = "Fill in this field";
+        } else if (!formData.email.includes("@")) {
+            errors.email = "Incorrect format of email";
+        }
+
+        if (!formData.password) {
+            errors.password = "Fill in this field";
+        }
+        //console.log("errors", errors);
+        setFillingErrors(errors);
+
+        // Check if there are no errors
+        if (Object.keys(errors).length === 0) {
+            loginUser();
+            //alert("User is logged");
+            console.log(formData);
+        }
+    };
+
     return (
         <div className="login-container">
             <div className="login-container-img">
@@ -15,41 +85,60 @@ const Login = () => {
             </div>
             <div className="login-container-form">
                 <h1>Login to Your Account</h1>
-                <form className="login-form">
+                <form className="login-form" onSubmit={loginHandler}>
                     <div className="login-input-container">
                         <label htmlFor="email">Email</label>
                         <div className="login-input-field">
                             <input
-                                type="email"
+                                type="text"
                                 name="email"
                                 id="email"
                                 placeholder="example@mail.com"
+                                value={formData.email}
+                                onChange={(event) => {
+                                    inputHandler(event, "email");
+                                }}
                             />
                             <Mail className="input-icon" />
                         </div>
+                        {fillingErrors.email && (
+                            <p className="form-validation-error">
+                                {fillingErrors.email}
+                            </p>
+                        )}
                     </div>
                     <div className="login-input-container">
                         <label htmlFor="password">Password</label>
                         <div className="login-input-field">
                             <input
-                                type="password"
+                                type={showPassword ? "text" : "password"}
                                 name="password"
                                 id="password"
                                 placeholder="********"
+                                value={formData.password}
+                                onChange={(event) =>
+                                    inputHandler(event, "password")
+                                }
                             />
-                            <Eye
-                                className="input-icon"
-                                onClick={() => alert("Show password")}
-                            />
-                            {/* <EyeOff className="input-icon" /> */}
+                            {!showPassword ? (
+                                <Eye
+                                    className="input-icon"
+                                    onClick={() => setShowPassword(true)}
+                                />
+                            ) : (
+                                <EyeOff
+                                    className="input-icon"
+                                    onClick={() => setShowPassword(false)}
+                                />
+                            )}
                         </div>
+                        {fillingErrors.password && (
+                            <p className="form-validation-error">
+                                {fillingErrors.password}
+                            </p>
+                        )}
                     </div>
-                    <button
-                        className="login-container-button"
-                        onClick={() => alert("Login")}
-                    >
-                        Log In
-                    </button>
+                    <button className="login-container-button">Log In</button>
                     <div>
                         <p>
                             Do not have an account?{" "}
