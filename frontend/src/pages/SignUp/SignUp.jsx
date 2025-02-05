@@ -33,11 +33,17 @@ const SignUp = () => {
                 "http://localhost:5000/register",
                 requestOptions
             );
-            if (!response.ok) {
-                throw new Error("Network response was not ok");
-            }
             const data = await response.json();
-            console.log("User created successfully:", data);
+            if (
+                response.status === 409 &&
+                data.message === "User already exists"
+            ) {
+                alert("User with such email already exists");
+            } else if (!response.ok) {
+                throw new Error("Error creating user");
+            } else {
+                console.log("User created successfully:", data);
+            }
         } catch (error) {
             console.error(
                 "There was a problem with the fetch operation:",
@@ -93,7 +99,7 @@ const SignUp = () => {
         // Check if there are no errors
         if (Object.keys(errors).length === 0) {
             createUser();
-            alert("User is created");
+            //alert("User is created");
             console.log(formData);
         }
     };
