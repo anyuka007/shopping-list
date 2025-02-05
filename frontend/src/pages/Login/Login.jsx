@@ -1,12 +1,13 @@
 import "../../css/Login.css";
 import { Mail, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Login = () => {
     const [formData, setFormData] = useState({});
     const [showPassword, setShowPassword] = useState(false);
     const [fillingErrors, setFillingErrors] = useState({});
+    const navigate = useNavigate();
 
     const inputHandler = (event, property) => {
         setFillingErrors((prevState) => ({ ...prevState, [property]: "" }));
@@ -40,6 +41,9 @@ const Login = () => {
                 throw new Error("Error by login user");
             } else {
                 console.log("User is logged", data);
+                localStorage.setItem("token", data.token);
+                localStorage.setItem("username", data.firstName);
+                navigate("/");
             }
         } catch (error) {
             console.error(
