@@ -20,10 +20,13 @@ const List = () => {
     const addNewItemHandler = () => {
         if (!newItemName) {
             setError("Please fill this field");
+        } else {
+            addNewItem();
         }
     };
 
     const addNewItem = async () => {
+        const listId = "67a3c5d8fbe714bd2d27c343";
         const token = localStorage.getItem("token");
         //const listId = list._id
         if (!token) {
@@ -44,11 +47,19 @@ const List = () => {
             `http://localhost:5000/shoppinglist/${listId}`,
             requestOptions
         );
+        const data = await response.json();
+        if (
+            response.status === 409 &&
+            data.message === "There is already such item in list"
+        ) {
+            setError("There is already such item in list");
+            return;
+        }
         if (!response.ok) {
             const errorData = await response.json();
             throw new Error(errorData.message || "Error creating list");
         }
-        return await response.json();
+        return data;
     };
 
     return (

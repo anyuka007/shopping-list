@@ -49,6 +49,12 @@ export const addItemToShoppingList = async (req, res) => {
         if (!shoppingList) {
             return res.status(404).send({ message: "Shopping list not found" });
         }
+        if (shoppingList.items.some((item) => item.name === name)) {
+            return res
+                .status(409)
+                .send({ message: "There is already such item in list" });
+        }
+
         const newItem = { name };
         // Add the new item to the items array
         shoppingList.items.push(newItem);
