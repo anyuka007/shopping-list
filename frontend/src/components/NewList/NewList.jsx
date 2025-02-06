@@ -19,7 +19,7 @@ const NewList = () => {
                 console.log("List created");
             } catch (error) {
                 console.error("Error creating list:", error);
-                setError("Error creating list");
+                setError("Unable to create list");
             }
         }
     };
@@ -61,8 +61,9 @@ const NewList = () => {
                         placeholder="Name of the list"
                         onChange={inputHandler}
                     />
+                    {error && <p className="form-validation-error">{error}</p>}
                 </div>
-                {error && <p className="form-validation-error">{error}</p>}
+
                 <div className="new-list-button-container">
                     <button onClick={createListHandler}>Create New List</button>
                 </div>

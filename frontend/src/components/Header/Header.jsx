@@ -1,3 +1,4 @@
+import { clearLocalStorage } from "../../utils/checkToken";
 import "./Header.css";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -8,8 +9,7 @@ const Header = () => {
 
     const logoutHandler = () => {
         navigate("login");
-        localStorage.removeItem("token");
-        localStorage.removeItem("username");
+        clearLocalStorage();
     };
 
     return (

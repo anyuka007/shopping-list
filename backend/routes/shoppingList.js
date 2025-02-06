@@ -1,5 +1,6 @@
 import express from "express";
 import {
+    addItemToShoppingList,
     createShoppingList,
     getAllShoppingLists,
 } from "../controllers/shoppingListController.js";
@@ -12,4 +13,5 @@ shoppingListRouter
     .get(getAllShoppingLists)
     .post(authorization, createShoppingList);
 
+shoppingListRouter.route("/:id").post(authorization, addItemToShoppingList);
 export default shoppingListRouter;

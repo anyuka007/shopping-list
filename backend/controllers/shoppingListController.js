@@ -36,3 +36,29 @@ export const createShoppingList = async (req, res) => {
         );
     }
 };
+
+export const addItemToShoppingList = async (req, res) => {
+    try {
+        const listId = req.params.id;
+        console.log("listID", listId);
+        const { name } = req.body;
+        console.log("new Item", name);
+
+        // Find the shopping list by ID
+        const shoppingList = await ShoppingList.findById(listId);
+        if (!shoppingList) {
+            return res.status(404).send({ message: "Shopping list not found" });
+        }
+        const newItem = { name };
+        // Add the new item to the items array
+        shoppingList.items.push(newItem);
+
+        // Save the updated shopping list
+        await shoppingList.save();
+
+        res.status(200).send(shoppingList);
+    } catch (error) {
+        console.error("Error adding item to shopping list:", error);
+        res.status(500).send({ message: "Error adding new item" });
+    }
+};

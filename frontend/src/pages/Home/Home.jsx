@@ -3,6 +3,7 @@ import List from "../../components/List/List";
 import "../../css/Home.css";
 import { useEffect } from "react";
 import NewList from "../../components/NewList/NewList.jsx";
+import { clearLocalStorage, isTokenValid } from "../../utils/checkToken.js";
 
 const Home = () => {
     const navigate = useNavigate();
@@ -10,8 +11,9 @@ const Home = () => {
     //const userName = localStorage.getItem("username");
 
     useEffect(() => {
-        if (!token) {
+        if (!token || !isTokenValid(token)) {
             navigate("/start");
+            clearLocalStorage();
         }
     }, []);
     return (
