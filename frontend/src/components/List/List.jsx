@@ -11,6 +11,8 @@ const List = () => {
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
+    const token = localStorage.getItem("token");
+
     const inputHandler = (event) => {
         setError("");
         setNewItemName(event.target.value);
@@ -27,7 +29,7 @@ const List = () => {
 
     const addNewItem = async () => {
         const listId = "67a3c5d8fbe714bd2d27c343";
-        const token = localStorage.getItem("token");
+
         //const listId = list._id
         if (!token) {
             navigate("/login");

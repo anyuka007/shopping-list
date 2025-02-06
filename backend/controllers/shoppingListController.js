@@ -11,6 +11,18 @@ export const getAllShoppingLists = async (req, res) => {
     }
 };
 
+export const getUsersLists = async (req, res) => {
+    try {
+        const userId = req.user._id;
+        const usersLists = await ShoppingList.find({ user: userId });
+        return res.send("User has lists: ", usersLists.length);
+    } catch (error) {
+        res.status(500).send(
+            error.message || "Error getting users shopping lists"
+        );
+    }
+};
+
 export const createShoppingList = async (req, res) => {
     try {
         const userId = req.user._id;
