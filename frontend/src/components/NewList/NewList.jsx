@@ -1,9 +1,13 @@
 import { useState } from "react";
 import "./NewList.css";
+import { clearLocalStorage, isTokenValid } from "../../utils/checkToken";
+import { useNavigate } from "react-router-dom";
+import { fetchUsersLists } from "../../utils/fetchLists";
 
-const NewList = () => {
+const NewList = ({ setUserLists }) => {
     const [listTitle, setListTitle] = useState("");
     const [error, setError] = useState("");
+    const navigate = useNavigate();
 
     const inputHandler = (event) => {
         setError("");
@@ -16,7 +20,9 @@ const NewList = () => {
         } else {
             try {
                 await createList();
-                console.log("List created");
+                const updatedLists = await fetchUsersLists();
+                setUserLists(updatedLists);
+                setListTitle("");
             } catch (error) {
                 console.error("Error creating list:", error);
                 setError("Unable to create list");
@@ -26,8 +32,9 @@ const NewList = () => {
 
     const createList = async () => {
         const token = localStorage.getItem("token");
-        if (!token) {
-            throw new Error("No token found");
+        if (!token || !isTokenValid(token)) {
+            clearLocalStorage();
+            navigate("/login");
         }
         const requestOptions = {
             method: "POST",
@@ -43,13 +50,19 @@ const NewList = () => {
             "http://localhost:5000/shoppinglist",
             requestOptions
         );
-        if (response.status === "409") {
+        const data = await response.json();
+        if (
+            response.status === 409 &&
+            data.message === "List with such title exists"
+        ) {
             setError("List with such title exists");
+            return;
         } else if (!response.ok) {
             const errorData = await response.json();
             throw new Error(errorData.message || "Error creating list");
         }
-        return await response.json();
+
+        return await data;
     };
 
     return (
@@ -59,7 +72,11 @@ const NewList = () => {
                     <input
                         type="text"
                         placeholder="Name of the list"
+                        value={listTitle}
                         onChange={inputHandler}
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter") createListHandler();
+                        }}
                     />
                     {error && <p className="form-validation-error">{error}</p>}
                 </div>

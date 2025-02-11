@@ -1,13 +1,16 @@
 .home-container {
     height: 100%;
     /* background-image: url("../../public/images/origami.png");
-     
+    background-image: url("https://images.pexels.com/photos/7135073/pexels-photo-7135073.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-image: url("https://images.pexels.com/photos/7135055/pexels-photo-7135055.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-image: url("https://cdn.pixabay.com/photo/2016/04/27/13/31/background-1356642_1280.png");
+
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-attachment: fixed; */
     padding-top: 2rem;
-    padding-bottom: 2rem;*/
+    padding-bottom: 2rem;
 }
 
 .home-welcome-text {

@@ -1,8 +1,40 @@
+/* https://coolors.co/palette/f6bd60-f7ede2-f5cac3-84a59d-f28482 */
+
 .list-container {
     width: 300px;
     height: 300px;
-    border: 1px solid black;
-    overflow-y: scroll;
+
+    overflow: hidden;
+    overflow-y: auto;
+    /* border-radius: 20px;
+    background: #fefaf3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    border-radius: 20px;
+    background: #fefaf3;
+    box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+
+    margin: 1rem;
+}
+
+.list-container:hover {
+    background-color: #fffcf7;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Custom scrollbar styling */
+.list-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.list-container::-webkit-scrollbar-track {
+    background: #f7ede2;
+    border-radius: 10px;
+}
+
+.list-container::-webkit-scrollbar-thumb {
+    background-color: #e8cac9;
+    border-radius: 10px;
+    border: 2px solid #f7ede2;
 }
 
 .list-name {
@@ -10,13 +42,19 @@
     justify-content: space-between;
     align-items: center;
     padding: 1.2rem 2rem;
-    margin: 1.2rem 0;
-    /* background-color: #ffffff; */
+    margin: 0 0 1.2rem 0;
+    background-color: #f28482;
+    color: #f7ede2;
+    max-width: 100%; /* Ensure the container does not exceed the parent width */
+    word-wrap: break-word; /* Ensure long words break to the next line */
+    word-break: break-word;
+    white-space: normal; /* Allow text to wrap to the next line */
 }
 
 .list-name:hover {
     font-size: 1.8rem;
     font-weight: 600;
+    color: #555;
 }
 
 .list-icon {
@@ -24,6 +62,7 @@
     width: 2rem;
     cursor: pointer;
     color: #888;
+    color: #f7ede2;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
@@ -60,6 +99,12 @@
 
 .plus-icon {
     width: 2.5rem;
+    color: #a2a2a2;
+    color: #84a59d;
+}
+
+.plus-icon:hover {
+    transform: scale(1.1);
 }
 
 .input-validation-error {

@@ -1,21 +1,12 @@
 import ShoppingList from "../models/ShoppingList.js";
 
-export const getAllShoppingLists = async (req, res) => {
-    try {
-        const allLists = await ShoppingList.find();
-        res.status(200).send(allLists);
-    } catch (error) {
-        res.status(500).send(
-            error.message || "Error getting all shopping lists"
-        );
-    }
-};
-
 export const getUsersLists = async (req, res) => {
     try {
         const userId = req.user._id;
+        console.log("userId", userId);
         const usersLists = await ShoppingList.find({ user: userId });
-        return res.send("User has lists: ", usersLists.length);
+        console.log("usersLists", usersLists);
+        return res.send(usersLists);
     } catch (error) {
         res.status(500).send(
             error.message || "Error getting users shopping lists"
@@ -33,7 +24,7 @@ export const createShoppingList = async (req, res) => {
             user: userId,
         });
         console.log("isExist", isExist);
-        if (isExist) {
+        if (isExist.length > 0) {
             console.log("list exists");
             return res
                 .status(409)
@@ -78,5 +69,17 @@ export const addItemToShoppingList = async (req, res) => {
     } catch (error) {
         console.error("Error adding item to shopping list:", error);
         res.status(500).send({ message: "Error adding new item" });
+    }
+};
+
+export const deleteShoppingList = async (req, res) => {
+    try {
+        const listId = req.params.id;
+        await ShoppingList.findByIdAndDelete(listId);
+        console.log("listId", listId);
+        res.status(200).send({ message: "list deleted" });
+    } catch (error) {
+        console.error("Error deleting shopping list: ", error);
+        res.status(500).send({ message: "Error deleting shopping list" });
     }
 };

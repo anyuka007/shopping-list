@@ -8,6 +8,7 @@ export const ItemSchema = new mongoose.Schema({
         ref: Category,
         required: true,
     }, */
+    isChecked: { type: Boolean, default: false },
 });
 
 const Item = mongoose.model("Item", ItemSchema);

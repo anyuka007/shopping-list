@@ -16,7 +16,8 @@ body {
     font-size: 1.6rem;
     height: 100%;
     font-family: "Roboto", serif;
-    background-color: #fffcf7;
+    background-color: #fefaf3;
+    /* background-color: #f7ede2; */
 }
 
 .whole-page {

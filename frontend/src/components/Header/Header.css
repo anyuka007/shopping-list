@@ -4,6 +4,7 @@
     row-gap: 50px;
     flex: 0 0 7%;
     align-items: center;
+    margin-bottom: 1rem;
 }
 
 .header-left {
@@ -18,4 +19,21 @@
     width: 10%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.header-right button {
+    background-color: #efefef;
+    background-color: #84a59d;
+    padding: 1rem;
+    font-size: 14px;
+
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.header-right button:hover {
+    background-color: #bdb8b0;
 }
