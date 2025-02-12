@@ -11,6 +11,7 @@ import { isTokenValid } from "../../utils/checkToken.js";
 const List = ({ list, setUserLists }) => {
     const [newItemName, setNewItemName] = useState("");
     const [error, setError] = useState("");
+    const [isChecked, setIsChecked] = useState({});
     const navigate = useNavigate();
 
     const token = localStorage.getItem("token");
@@ -59,6 +60,7 @@ const List = ({ list, setUserLists }) => {
         } else {
             await addNewItem();
             const updatedLists = await fetchUsersLists();
+            setNewItemName("");
             setUserLists(updatedLists);
         }
     };
@@ -100,6 +102,12 @@ const List = ({ list, setUserLists }) => {
         return data;
     };
 
+    const checkItemHandler = (item, itemIndex) => {
+        console.log("list.title", list.title);
+        console.log("item", item);
+        console.log("itemIndex", itemIndex);
+    };
+
     return (
         <div className="list-container">
             <div className="list-name">
@@ -132,6 +140,7 @@ const List = ({ list, setUserLists }) => {
                         key={index}
                         item={item}
                         setUserLists={setUserLists}
+                        checkItemHandler={() => checkItemHandler(item, index)}
                     />
                 ))}
         </div>

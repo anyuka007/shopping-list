@@ -2,12 +2,13 @@ import { Pencil, Trash2 } from "lucide-react";
 import "./ListItem.css";
 import { useState } from "react";
 
-const ListItem = ({ item, setUserLists }) => {
+const ListItem = ({ item, setUserLists, checkItemHandler }) => {
     const [isChecked, setIsChecked] = useState(item.isChecked);
 
     const checkboxChangeHandler = (e) => {
         setIsChecked(e.target.checked);
         console.log("isChecked", isChecked, item.isChecked);
+        checkItemHandler();
     };
     return (
         <div className="list-item-container">
