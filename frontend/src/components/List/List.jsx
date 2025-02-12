@@ -2,7 +2,7 @@
 import "./List.css";
 /* import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons"; */
-import { Pencil, Trash2, Plus } from "lucide-react";
+import { Pencil, Trash2, Plus, Check, X } from "lucide-react";
 import ListItem from "./ListItem.jsx";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,8 @@ import { isTokenValid } from "../../utils/checkToken.js";
 const List = ({ list, setUserLists }) => {
     const [newItemName, setNewItemName] = useState("");
     const [error, setError] = useState("");
+    const [listName, setListName] = useState(list.title);
+    const [editMode, setEditMode] = useState(false);
     const navigate = useNavigate();
     const newItemInputRef = useRef(null);
 
@@ -32,6 +34,44 @@ const List = ({ list, setUserLists }) => {
         ) {
             setError("");
         }
+    };
+
+    const listNewNameInputHandler = (e) => {
+        setListName(e.target.value);
+        console.log("new name of the list: ", listName);
+    };
+
+    const saveNewNameHandler = async () => {
+        setEditMode(false);
+        console.log("saved");
+    };
+
+    const editListName = async () => {
+        const listId = list._id;
+        if (!token || !isTokenValid(token)) {
+            navigate("/login");
+            throw new Error("No token found");
+        }
+        const requestOptions = {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                newName: listName,
+            }),
+        };
+        const response = await fetch(
+            `http://localhost:5000/shoppinglist/${listId}`,
+            requestOptions
+        );
+        const data = await response.json();
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || "Error deleting list");
+        }
+        return data;
     };
 
     const deleteHandler = async () => {
@@ -124,11 +164,49 @@ const List = ({ list, setUserLists }) => {
         <div className="list-container">
             <div className="list-name">
                 <div>
-                    <h3>{list.title}</h3>
+                    {!editMode ? (
+                        <h3>{list.title}</h3>
+                    ) : (
+                        <input
+                            className="list-new-name-input"
+                            type="text"
+                            placeholder={list.title}
+                            value={listName}
+                            onChange={listNewNameInputHandler}
+                            onKeyDown={(e) => {
+                                if (e.key === "Enter") saveNewNameHandler();
+                            }}
+                        />
+                    )}
                 </div>
                 <div>
-                    <Pencil className="list-icon" />
-                    <Trash2 className="list-icon" onClick={deleteHandler} />
+                    {!editMode ? (
+                        <>
+                            <Pencil
+                                className="list-item-icon"
+                                onClick={() => {
+                                    {
+                                        setEditMode(true);
+                                    }
+                                }}
+                            />
+                            <Trash2
+                                className="list-item-icon"
+                                onClick={deleteHandler}
+                            />{" "}
+                        </>
+                    ) : (
+                        <>
+                            <Check
+                                className="list-item-icon"
+                                onClick={saveNewNameHandler}
+                            />
+                            <X
+                                className="list-item-icon"
+                                onClick={() => setEditMode(false)}
+                            />
+                        </>
+                    )}
                 </div>
             </div>
             <div className="list-new-item">
