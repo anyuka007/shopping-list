@@ -83,3 +83,22 @@ export const deleteShoppingList = async (req, res) => {
         res.status(500).send({ message: "Error deleting shopping list" });
     }
 };
+
+export const deleteItem = async (req, res) => {
+    try {
+        const listId = req.params.id;
+        //console.log("listID", listId);
+        const { itemIndex } = req.body;
+        //console.log("itemIndex", itemIndex);
+        const listToUpdate = await ShoppingList.findById(listId);
+        console.log("listToUpdate", listToUpdate.title);
+        listToUpdate.items.splice(itemIndex, 1);
+        await listToUpdate.save();
+        // const updatedList = await ShoppingList.findById(listId)
+        console.log("updatedList", listToUpdate);
+        return res.status(200).send(listToUpdate);
+    } catch (error) {
+        console.error("Error deleting item: ", error);
+        res.status(500).send({ message: "Error deleting item" });
+    }
+};

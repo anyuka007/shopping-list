@@ -2,6 +2,7 @@ import express from "express";
 import {
     addItemToShoppingList,
     createShoppingList,
+    deleteItem,
     deleteShoppingList,
     getUsersLists,
 } from "../controllers/shoppingListController.js";
@@ -17,6 +18,6 @@ shoppingListRouter
 shoppingListRouter
     .route("/:id")
     .delete(authorization, deleteShoppingList)
-
-    .post(authorization, addItemToShoppingList);
+    .post(authorization, addItemToShoppingList)
+    .patch(authorization, deleteItem);
 export default shoppingListRouter;
