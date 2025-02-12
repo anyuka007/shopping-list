@@ -87,18 +87,41 @@ export const deleteShoppingList = async (req, res) => {
 export const deleteItem = async (req, res) => {
     try {
         const listId = req.params.id;
-        //console.log("listID", listId);
         const { itemIndex } = req.body;
-        //console.log("itemIndex", itemIndex);
-        const listToUpdate = await ShoppingList.findById(listId);
-        console.log("listToUpdate", listToUpdate.title);
-        listToUpdate.items.splice(itemIndex, 1);
-        await listToUpdate.save();
-        // const updatedList = await ShoppingList.findById(listId)
-        console.log("updatedList", listToUpdate);
-        return res.status(200).send(listToUpdate);
+        const shoppingList = await ShoppingList.findById(listId);
+        console.log("listToUpdate", shoppingList.title);
+        shoppingList.items.splice(itemIndex, 1);
+        await shoppingList.save();
+        console.log("updatedList", shoppingList);
+        return res.status(200).send({ success: true });
     } catch (error) {
         console.error("Error deleting item: ", error);
         res.status(500).send({ message: "Error deleting item" });
+    }
+};
+
+export const editItem = async (req, res) => {
+    try {
+        const listId = req.params.id;
+        const { itemIndex, newName, isChecked } = req.body;
+        const shoppingList = await ShoppingList.findById(listId);
+        console.log("listToUpdate", shoppingList.title);
+        console.log("itemToUpdate", shoppingList.items[itemIndex].name);
+
+        const itemToUpdate = shoppingList.items[itemIndex];
+        if (typeof newName !== "undefined") {
+            itemToUpdate.name = newName;
+        }
+        if (typeof isChecked !== "undefined") {
+            itemToUpdate.isChecked = isChecked;
+        }
+
+        shoppingList.items.splice(itemIndex, 1, itemToUpdate);
+        await shoppingList.save();
+        //console.log("updatedList", shoppingList);
+        return res.status(200).send({ success: true });
+    } catch (error) {
+        console.error("Error editing item: ", error);
+        res.status(500).send({ message: "Error editing item" });
     }
 };

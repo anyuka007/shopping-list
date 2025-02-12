@@ -3,6 +3,7 @@ import {
     addItemToShoppingList,
     createShoppingList,
     deleteItem,
+    editItem,
     deleteShoppingList,
     getUsersLists,
 } from "../controllers/shoppingListController.js";
@@ -19,5 +20,6 @@ shoppingListRouter
     .route("/:id")
     .delete(authorization, deleteShoppingList)
     .post(authorization, addItemToShoppingList)
-    .patch(authorization, deleteItem);
+    .patch(authorization, deleteItem)
+    .put(authorization, editItem);
 export default shoppingListRouter;
