@@ -84,7 +84,7 @@
     padding: 10px;
     /* border-bottom: 1px solid #ccc; */
     border: none;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #84a59d;
     /* background-color: #fffcf7; */
     background-color: inherit;
     font-size: 16px;
@@ -93,7 +93,7 @@
 
 .list-new-item input:focus {
     border-color: #fff;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #84a59d;
     outline: none;
 }
 

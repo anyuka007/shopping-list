@@ -23,7 +23,7 @@ const Home = () => {
         const getLists = async () => {
             const lists = await fetchUsersLists();
             setUserLists(lists);
-            console.log("lists", lists);
+            //console.log("lists", lists);
         };
         if (token) {
             getLists();

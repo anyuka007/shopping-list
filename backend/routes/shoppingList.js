@@ -20,6 +20,6 @@ shoppingListRouter
     .route("/:id")
     .delete(authorization, deleteShoppingList)
     .post(authorization, addItemToShoppingList)
-    .patch(authorization, deleteItem)
-    .put(authorization, editItem);
+    .put(authorization, deleteItem)
+    .patch(authorization, editItem);
 export default shoppingListRouter;
