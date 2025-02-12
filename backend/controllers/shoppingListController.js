@@ -84,7 +84,23 @@ export const deleteShoppingList = async (req, res) => {
     }
 };
 
-export const deleteItem = async (req, res) => {
+export const editShoppingListsName = async (req, res) => {
+    try {
+        const listId = req.params.id;
+        console.log("listId", listId);
+        const { newName } = req.body;
+        console.log("newName", newName);
+        await ShoppingList.findByIdAndUpdate(listId, {
+            title: newName,
+        });
+        res.status(200).send({ success: true });
+    } catch (error) {
+        console.error("Error renaming shopping list: ", error);
+        res.status(500).send({ message: "Error renaming shopping list" });
+    }
+};
+
+/* export const deleteItem = async (req, res) => {
     try {
         const listId = req.params.id;
         const { itemIndex } = req.body;
@@ -98,9 +114,9 @@ export const deleteItem = async (req, res) => {
         console.error("Error deleting item: ", error);
         res.status(500).send({ message: "Error deleting item" });
     }
-};
+}; */
 
-export const editItem = async (req, res) => {
+/* export const editItem = async (req, res) => {
     try {
         const listId = req.params.id;
         const { itemIndex, newName, isChecked } = req.body;
@@ -124,4 +140,4 @@ export const editItem = async (req, res) => {
         console.error("Error editing item: ", error);
         res.status(500).send({ message: "Error editing item" });
     }
-};
+}; */

@@ -59,7 +59,7 @@ const ListItem = ({ item, setUserLists, list }) => {
             }),
         };
         const response = await fetch(
-            `http://localhost:5000/shoppinglist/${listId}`,
+            `http://localhost:5000/items/${listId}`,
             requestOptions
         );
         const data = await response.json();
@@ -93,7 +93,7 @@ const ListItem = ({ item, setUserLists, list }) => {
             }),
         };
         const response = await fetch(
-            `http://localhost:5000/shoppinglist/${listId}`,
+            `http://localhost:5000/items/${listId}`,
             requestOptions
         );
 
@@ -117,7 +117,9 @@ const ListItem = ({ item, setUserLists, list }) => {
                             onChange={checkboxChangeHandler}
                         />
 
-                        <p>{item.name}</p>
+                        <p onDoubleClick={() => setEditMode(true)}>
+                            {item.name}
+                        </p>
                     </>
                 ) : (
                     <input

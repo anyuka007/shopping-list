@@ -42,8 +42,10 @@ const List = ({ list, setUserLists }) => {
     };
 
     const saveNewNameHandler = async () => {
+        await editListName();
+        const updatedLists = await fetchUsersLists();
+        setUserLists(updatedLists);
         setEditMode(false);
-        console.log("saved");
     };
 
     const editListName = async () => {
@@ -165,7 +167,9 @@ const List = ({ list, setUserLists }) => {
             <div className="list-name">
                 <div>
                     {!editMode ? (
-                        <h3>{list.title}</h3>
+                        <h3 onDoubleClick={() => setEditMode(true)}>
+                            {list.title}
+                        </h3>
                     ) : (
                         <input
                             className="list-new-name-input"
