@@ -89,10 +89,10 @@ export const deleteItem = async (req, res) => {
         const listId = req.params.id;
         const { itemIndex } = req.body;
         const shoppingList = await ShoppingList.findById(listId);
-        console.log("listToUpdate", shoppingList.title);
+        //console.log("listToUpdate", shoppingList.title);
         shoppingList.items.splice(itemIndex, 1);
         await shoppingList.save();
-        console.log("updatedList", shoppingList);
+        //console.log("updatedList", shoppingList);
         return res.status(200).send({ success: true });
     } catch (error) {
         console.error("Error deleting item: ", error);
