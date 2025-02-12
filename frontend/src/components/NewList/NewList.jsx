@@ -1,13 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./NewList.css";
 import { clearLocalStorage, isTokenValid } from "../../utils/checkToken";
 import { useNavigate } from "react-router-dom";
 import { fetchUsersLists } from "../../utils/fetchLists";
 
+// eslint-disable-next-line react/prop-types
 const NewList = ({ setUserLists }) => {
     const [listTitle, setListTitle] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
+    const newListNameInputRef = useRef(null);
+
+    useEffect(() => {
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
+    //function checks if the click event occurred outside of the input field referenced by newListNameInputRef
+    const handleClickOutside = (event) => {
+        if (
+            newListNameInputRef.current &&
+            !newListNameInputRef.current.contains(event.target)
+        ) {
+            setError("");
+        }
+    };
 
     const inputHandler = (event) => {
         setError("");
@@ -53,7 +72,7 @@ const NewList = ({ setUserLists }) => {
         const data = await response.json();
         if (
             response.status === 409 &&
-            data.message === "List with such title exists"
+            data.message === "List with such title already exists"
         ) {
             setError("List with such title exists");
             return;
@@ -70,6 +89,7 @@ const NewList = ({ setUserLists }) => {
             <div className="new-list-name">
                 <div className="new-list-name-input-container">
                     <input
+                        ref={newListNameInputRef}
                         type="text"
                         placeholder="Name of the list"
                         value={listTitle}

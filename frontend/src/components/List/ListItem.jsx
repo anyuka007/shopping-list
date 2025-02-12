@@ -1,4 +1,5 @@
-import { Pencil, Trash2, Check } from "lucide-react";
+/* eslint-disable react/prop-types */
+import { Pencil, Trash2, Check, X } from "lucide-react";
 import "./ListItem.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +9,7 @@ import { isTokenValid } from "../../utils/checkToken";
 const ListItem = ({ item, setUserLists, list }) => {
     const [isChecked, setIsChecked] = useState(item.isChecked);
     const [editMode, setEditMode] = useState(false);
-    const [newName, setNewName] = useState("");
+    const [newName, setNewName] = useState(item.name);
     const navigate = useNavigate();
 
     const itemIndex = list.items.indexOf(item);
@@ -18,19 +19,26 @@ const ListItem = ({ item, setUserLists, list }) => {
         const newCheckedState = e.target.checked;
         setIsChecked(newCheckedState);
         //console.log("listName", list.title);
-        console.log("itemName", item.name);
+        //console.log("itemName", item.name);
         await editItem({ isChecked: newCheckedState });
         const updatedLists = await fetchUsersLists();
         setUserLists(updatedLists);
     };
 
     const newNameInputHandler = (e) => {
+        console.log("newName ", newName);
         setNewName(e.target.value);
     };
 
-    const saveNewNameHandler = () => {
-        setNewName(newName);
-        console.log("newName", newName);
+    const saveNewNameHandler = async () => {
+        if (newName === item.name || !newName) {
+            setEditMode(false);
+            return;
+        }
+        await editItem({ newName: newName });
+        const updatedLists = await fetchUsersLists();
+        setUserLists(updatedLists);
+        setEditMode(false);
     };
 
     const editItem = async (changes) => {
@@ -62,6 +70,41 @@ const ListItem = ({ item, setUserLists, list }) => {
         return data;
     };
 
+    const deleteItemHandler = async () => {
+        await deleteItem();
+        const updatedLists = await fetchUsersLists();
+        setUserLists(updatedLists);
+    };
+
+    const deleteItem = async () => {
+        const listId = list._id;
+        if (!token || !isTokenValid(token)) {
+            navigate("/login");
+            throw new Error("No token found");
+        }
+        const requestOptions = {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+                itemIndex: itemIndex,
+            }),
+        };
+        const response = await fetch(
+            `http://localhost:5000/shoppinglist/${listId}`,
+            requestOptions
+        );
+
+        const data = await response.json();
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || "Error deleting item");
+        }
+        return data;
+    };
+
     return (
         <div className="list-item-container">
             <div className="list-item-container-left">
@@ -80,8 +123,12 @@ const ListItem = ({ item, setUserLists, list }) => {
                     <input
                         className="list-item-new-name-input"
                         type="text"
+                        placeholder={item.name}
                         value={newName}
                         onChange={newNameInputHandler}
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter") saveNewNameHandler();
+                        }}
                     />
                 )}
             </div>
@@ -93,20 +140,25 @@ const ListItem = ({ item, setUserLists, list }) => {
                             onClick={() => {
                                 {
                                     setEditMode(true);
-                                    setNewName("");
                                 }
                             }}
                         />
-                        <Trash2 className="list-item-icon" />{" "}
+                        <Trash2
+                            className="list-item-icon"
+                            onClick={deleteItemHandler}
+                        />{" "}
                     </>
                 ) : (
-                    <Check
-                        className="list-item-icon"
-                        onClick={() => {
-                            saveNewNameHandler();
-                            setEditMode(false);
-                        }}
-                    />
+                    <>
+                        <Check
+                            className="list-item-icon"
+                            onClick={saveNewNameHandler}
+                        />
+                        <X
+                            className="list-item-icon"
+                            onClick={() => setEditMode(false)}
+                        />
+                    </>
                 )}
             </div>
         </div>

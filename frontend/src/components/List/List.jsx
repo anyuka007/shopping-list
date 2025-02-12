@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
 import "./List.css";
 /* import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons"; */
 import { Pencil, Trash2, Plus } from "lucide-react";
 import ListItem from "./ListItem.jsx";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchUsersLists } from "../../utils/fetchLists.js";
 import { isTokenValid } from "../../utils/checkToken.js";
@@ -12,8 +13,26 @@ const List = ({ list, setUserLists }) => {
     const [newItemName, setNewItemName] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
+    const newItemInputRef = useRef(null);
 
     const token = localStorage.getItem("token");
+
+    useEffect(() => {
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
+    //function checks if the click event occurred outside of the input field referenced by newItemInputRef
+    const handleClickOutside = (event) => {
+        if (
+            newItemInputRef.current &&
+            !newItemInputRef.current.contains(event.target)
+        ) {
+            setError("");
+        }
+    };
 
     const deleteHandler = async () => {
         console.log("list is deleted");
@@ -114,6 +133,7 @@ const List = ({ list, setUserLists }) => {
             </div>
             <div className="list-new-item">
                 <input
+                    ref={newItemInputRef}
                     type="text"
                     placeholder="Add new item"
                     value={newItemName}
