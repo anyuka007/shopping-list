@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "../../css/Start.css";
+import Button from "../../components/Button/Button";
 
 const Start = () => {
     const navigate = useNavigate();
@@ -24,19 +25,19 @@ const Start = () => {
                     account.
                 </h4>
                 <div className="start-container-buttons">
-                    <button
+                    <Button
                         className="start-container-button"
                         /* onClick={() => alert("Log in")} */
-                        onClick={() => navigate("/login")}
-                    >
-                        Log In
-                    </button>
-                    <button
+                        onClickHandler={() => navigate("/login")}
+                        width="20rem"
+                        text="Log In"
+                    />
+                    <Button
                         className="start-container-button"
-                        onClick={() => alert("Sign up")}
-                    >
-                        Sign Up
-                    </button>
+                        onClickHandler={() => navigate("/signup")}
+                        text="Sign Up"
+                        width="20rem"
+                    />
                 </div>
             </div>
         </div>

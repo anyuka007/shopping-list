@@ -38,3 +38,14 @@ body {
     font-size: 1.2rem;
     color: red;
 }
+
+.nav-link {
+    color: #f28482;
+}
+.nav-link:hover {
+    font-weight: 600;
+}
+
+.input-icon-eye:hover {
+    transform: scale(1.1);
+}

@@ -3,6 +3,7 @@ import "./NewList.css";
 import { clearLocalStorage, isTokenValid } from "../../utils/checkToken";
 import { useNavigate } from "react-router-dom";
 import { fetchUsersLists } from "../../utils/fetchLists";
+import Button from "../Button/Button";
 
 // eslint-disable-next-line react/prop-types
 const NewList = ({ setUserLists }) => {
@@ -102,7 +103,12 @@ const NewList = ({ setUserLists }) => {
                 </div>
 
                 <div className="new-list-button-container">
-                    <button onClick={createListHandler}>Create New List</button>
+                    <Button
+                        text="Create New List"
+                        /* width="250px" */
+                        /* fontSize="16px" */
+                        onClickHandler={createListHandler}
+                    />
                 </div>
             </div>
         </div>

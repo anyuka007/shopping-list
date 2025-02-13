@@ -2,6 +2,7 @@ import "../../css/SignUp.css";
 import { User, Mail, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import Button from "../../components/Button/Button";
 
 const SignUp = () => {
     const [formData, setFormData] = useState({});
@@ -115,7 +116,7 @@ const SignUp = () => {
             </div>
             <div className="signup-container-form">
                 <h1>Create Your Account</h1>
-                <form className="signup-form" onSubmit={createUserHandler}>
+                <form className="signup-form">
                     <div className="signup-input-container">
                         <label htmlFor="firstname">First name</label>
                         <div className="signup-input-field">
@@ -194,12 +195,12 @@ const SignUp = () => {
                             />
                             {!showPassword ? (
                                 <Eye
-                                    className="input-icon"
+                                    className="input-icon input-icon-eye"
                                     onClick={() => setShowPassword(true)}
                                 />
                             ) : (
                                 <EyeOff
-                                    className="input-icon"
+                                    className="input-icon input-icon-eye"
                                     onClick={() => setShowPassword(false)}
                                 />
                             )}
@@ -227,12 +228,12 @@ const SignUp = () => {
                             />
                             {!showConfirmPassword ? (
                                 <Eye
-                                    className="input-icon"
+                                    className="input-icon input-icon-eye"
                                     onClick={() => setShowConfirmPassword(true)}
                                 />
                             ) : (
                                 <EyeOff
-                                    className="input-icon"
+                                    className="input-icon input-icon-eye"
                                     onClick={() =>
                                         setShowConfirmPassword(false)
                                     }
@@ -245,13 +246,17 @@ const SignUp = () => {
                             </p>
                         )}
                     </div>
-                    <button className="signup-container-button">
-                        Create Account
-                    </button>
+                    <Button
+                        className="signup-container-button"
+                        onClickHandler={createUserHandler}
+                        text="Create Account"
+                    />
                     <div>
                         <p>
                             Have an account?{" "}
-                            <NavLink to="/login">Sign in</NavLink>
+                            <NavLink to="/login" className="nav-link">
+                                Sign in
+                            </NavLink>
                         </p>
                     </div>
                 </form>

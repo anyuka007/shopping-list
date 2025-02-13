@@ -25,6 +25,10 @@
     margin: 0 auto;
 }
 
+.signup-container-form h1 {
+    font-size: 3rem;
+}
+
 .signup-input-container {
     display: flex;
     flex-direction: column;
@@ -34,7 +38,8 @@
 .signup-input-field {
     width: 30rem;
     height: 4rem;
-    border: 1px solid black;
+    border: 1px solid #84a59d;
+    border-radius: 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -42,7 +47,7 @@
 }
 
 .input-icon {
-    color: #888;
+    color: #84a59d;
     width: 2rem;
 }
 
@@ -57,8 +62,7 @@
 .signup-input-field input:focus {
     outline: none;
 }
-.signup-container-button {
-    /* background-color: #fffcf7; */
+/* .signup-container-button {
     background-color: #eef0ef;
     width: 30rem;
     height: 50px;
@@ -68,4 +72,4 @@
 
 .signup-container-button:hover {
     background-color: #e3e3e3;
-}
+} */

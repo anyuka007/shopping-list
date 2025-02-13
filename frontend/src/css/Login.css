@@ -25,6 +25,10 @@
     margin: 0 auto;
 }
 
+.login-container-form h1 {
+    font-size: 3rem;
+}
+
 .login-input-container {
     display: flex;
     flex-direction: column;
@@ -34,15 +38,16 @@
 .login-input-field {
     width: 30rem;
     height: 4rem;
-    border: 1px solid black;
+    border: 1px solid #84a59d;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
+    border-radius: 5px;
 }
 
 .input-icon {
-    color: #888;
+    color: #84a59d;
     width: 2rem;
 }
 
@@ -58,9 +63,7 @@
     background-color: #fffcf7;
 }
 
-.login-container-button {
-    /* background-color: #fffcf7; */
-    /* background-color: #eef0ef; */
+/* .login-container-button {
     background-color: #efefef;
     width: 30rem;
     height: 50px;
@@ -71,3 +74,4 @@
 .login-container-button:hover {
     background-color: #e3e3e3;
 }
+ */

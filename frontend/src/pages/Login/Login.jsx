@@ -2,6 +2,7 @@ import "../../css/Login.css";
 import { Mail, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import Button from "../../components/Button/Button";
 
 const Login = () => {
     const [formData, setFormData] = useState({});
@@ -94,7 +95,7 @@ const Login = () => {
             </div>
             <div className="login-container-form">
                 <h1>Login to Your Account</h1>
-                <form className="login-form" onSubmit={loginHandler}>
+                <form className="login-form">
                     <div className="login-input-container">
                         <label htmlFor="email">Email</label>
                         <div className="login-input-field">
@@ -131,12 +132,12 @@ const Login = () => {
                             />
                             {!showPassword ? (
                                 <Eye
-                                    className="input-icon"
+                                    className="input-icon input-icon-eye"
                                     onClick={() => setShowPassword(true)}
                                 />
                             ) : (
                                 <EyeOff
-                                    className="input-icon"
+                                    className="input-icon input-icon-eye"
                                     onClick={() => setShowPassword(false)}
                                 />
                             )}
@@ -147,11 +148,18 @@ const Login = () => {
                             </p>
                         )}
                     </div>
-                    <button className="login-container-button">Log In</button>
+                    <Button
+                        className="login-container-button"
+                        text="Log In"
+                        /* width="30rem" */
+                        onClickHandler={loginHandler}
+                    />
                     <div>
                         <p>
                             Do not have an account?{" "}
-                            <NavLink to="/signup">Sign up</NavLink>
+                            <NavLink className="nav-link" to="/signup">
+                                Sign up
+                            </NavLink>
                         </p>
                     </div>
                 </form>

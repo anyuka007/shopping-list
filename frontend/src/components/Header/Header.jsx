@@ -1,4 +1,5 @@
 import { clearLocalStorage } from "../../utils/checkToken";
+import Button from "../Button/Button";
 import "./Header.css";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -8,7 +9,7 @@ const Header = () => {
     const navigate = useNavigate();
 
     const logoutHandler = () => {
-        navigate("login");
+        navigate("/login");
         clearLocalStorage();
     };
 
@@ -22,7 +23,11 @@ const Header = () => {
                 <div className="header-right">
                     <div>{`Hello, ${userName}`}</div>
                     <div>
-                        <button onClick={logoutHandler}>Log out</button>
+                        <Button
+                            onClickHandler={logoutHandler}
+                            height="4rem"
+                            text="Log Out"
+                        />
                     </div>
                 </div>
             )}
