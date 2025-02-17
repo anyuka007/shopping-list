@@ -6,7 +6,13 @@ import Button from "../../components/Button/Button";
 import { loginUser } from "../../utils/login";
 
 const SignUp = () => {
-    const [formData, setFormData] = useState({});
+    const [formData, setFormData] = useState({
+        firstname: "",
+        lastname: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+    });
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [validationErrors, setValidationErrors] = useState({});
@@ -37,17 +43,25 @@ const SignUp = () => {
                 requestOptions
             );
             const data = await response.json();
+            let success = false;
             if (
                 response.status === 409 &&
                 data.message === "User already exists"
             ) {
-                alert("User with such email already exists");
+                //alert("User with such email already exists");
+                setValidationErrors((prevState) => ({
+                    ...prevState,
+                    email: "Email is already in use. Please log in",
+                }));
+                return;
             } else if (!response.ok) {
                 throw new Error("Error creating user");
             } else {
-                console.log("User created successfully:", data);
+                success = true;
+                console.log("User created successfully:");
                 //navigate("/");
             }
+            return success;
         } catch (error) {
             console.error(
                 "There was a problem with the fetch operation:",
@@ -61,17 +75,17 @@ const SignUp = () => {
         let errors = {};
 
         // Validate firstname
-        if (/^(?![a-zA-Z]+$)/.test(formData.firstname)) {
-            errors.firstname = "User name contains invalid characters";
-        } else if (!formData.firstname) {
+        if (!formData.firstname) {
             errors.firstname = "Fill in this field";
+        } else if (/^(?![a-zA-Z]+$)/.test(formData.firstname)) {
+            errors.firstname = "User name contains invalid characters";
         }
 
         // Validate lastname
-        if (/^(?![a-zA-Z]+$)/.test(formData.lastname)) {
-            errors.lastname = "User lastname contains invalid characters";
-        } else if (!formData.lastname) {
+        if (!formData.lastname) {
             errors.lastname = "Fill in this field";
+        } else if (/^(?![a-zA-Z]+$)/.test(formData.lastname)) {
+            errors.lastname = "User lastname contains invalid characters";
         }
 
         // Validate email
@@ -102,9 +116,12 @@ const SignUp = () => {
 
         // Check if there are no errors
         if (Object.keys(errors).length === 0) {
-            await createUser();
-            await loginUser(formData.email, formData.password);
-            navigate("/");
+            const userCreated = await createUser();
+            if (userCreated) {
+                await loginUser(formData.email, formData.password);
+                navigate("/");
+            }
+            //
             //alert("User is created");
             //console.log(formData);
         }

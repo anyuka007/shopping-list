@@ -43,7 +43,7 @@ const Login = () => {
                 formData.email,
                 formData.password
             );
-            console.log(loginError);
+            //console.log(loginError);
             if (loginError === "User not found") {
                 setFillingErrors((prevErrors) => ({
                     ...prevErrors,
