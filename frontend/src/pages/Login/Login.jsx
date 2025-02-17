@@ -19,47 +19,6 @@ const Login = () => {
         }));
     };
 
-    /* export const loginUser = async () => {
-        const requestOptions = {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                email: formData.email,
-                password: formData.password,
-            }),
-        };
-        try {
-            const response = await fetch(
-                "http://localhost:5000/login",
-                requestOptions
-            );
-            const data = await response.json();
-            if (
-                response.status === 401 &&
-                data.message === "Invalid credentials"
-            ) {
-                alert("Invalid password");
-            } else if (
-                response.status === 404 &&
-                data.message === "User not found"
-            ) {
-                alert("User not found");
-            } else if (!response.ok) {
-                throw new Error("Error by login user");
-            } else {
-                console.log("User is logged", data);
-                localStorage.setItem("token", data.token);
-                localStorage.setItem("username", data.firstName);
-                navigate("/");
-            }
-        } catch (error) {
-            console.error(
-                "There was a problem with the fetch operation:",
-                error
-            );
-        }
-    }; */
-
     const loginHandler = async (event) => {
         event.preventDefault();
         let errors = {};
@@ -73,26 +32,25 @@ const Login = () => {
         if (!formData.password) {
             errors.password = "Fill in this field";
         }
-        //console.log("errors", errors);
         setFillingErrors(errors);
 
         // Check if there are no errors
         if (Object.keys(errors).length === 0) {
             //await loginUser(formData.email, formData.password);
+
+            // log in or becoming errors
             const loginError = await loginUser(
                 formData.email,
                 formData.password
             );
             console.log(loginError);
             if (loginError === "User not found") {
-                //alert(loginError);
                 setFillingErrors((prevErrors) => ({
                     ...prevErrors,
                     email: loginError,
                 }));
                 return;
             } else if (loginError === "Invalid password") {
-                //alert(loginError);
                 setFillingErrors((prevErrors) => ({
                     ...prevErrors,
                     password: loginError,
@@ -101,8 +59,7 @@ const Login = () => {
             } else {
                 navigate("/");
             }
-            //alert("User is logged");
-            console.log(formData);
+            //console.log(formData);
         }
     };
 
