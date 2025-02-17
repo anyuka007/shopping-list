@@ -1,20 +1,7 @@
-import Item from "../models/Item.js";
+//import Item from "../models/Item.js";
 import ShoppingList from "../models/ShoppingList.js";
 
-export const getAllItems = async (req, res) => {
-    try {
-        const items = await Item.find();
-        return res.status(200).send(items);
-    } catch (error) {
-        return res.status(500).send(error.message || "Server Error");
-    }
-};
-
-export const getItem = (req, res) => {
-    res.send("Get one item");
-};
-
-export const addItem = async (req, res) => {
+/* export const addItem = async (req, res) => {
     try {
         const { name, category } = req.body;
         if (!name || !category) {
@@ -22,7 +9,7 @@ export const addItem = async (req, res) => {
         }
         const isItemInDB = await Item.findOne({
             name: name.toLowerCase(),
-            category: category.toLowerCase(),
+            //category: category.toLowerCase(),
         });
         if (isItemInDB) {
             return res.status(409).send("There is already such an item");
@@ -30,7 +17,7 @@ export const addItem = async (req, res) => {
 
         const newItem = await Item.create({
             name: name.toLowerCase(),
-            category: category.toLowerCase(),
+            //category: category.toLowerCase(),
         });
         return res
             .status(200)
@@ -38,25 +25,30 @@ export const addItem = async (req, res) => {
     } catch (error) {
         return res.status(500).send(error.message || "Error adding new item");
     }
-};
+}; */
 
+// Editing Item in Shopping list Name and Checkbox state
 export const editItem = async (req, res) => {
     try {
         const listId = req.params.id;
         const { itemIndex, newName, isChecked } = req.body;
         const shoppingList = await ShoppingList.findById(listId);
-        console.log("listToUpdate", shoppingList.title);
-        console.log("itemToUpdate", shoppingList.items[itemIndex].name);
+        // console.log("listToUpdate", shoppingList.title);
+        // console.log("itemToUpdate", shoppingList.items[itemIndex].name);
 
         const itemToUpdate = shoppingList.items[itemIndex];
+        // Editing the name
         if (typeof newName !== "undefined") {
             itemToUpdate.name = newName;
         }
+        // Changing checkbox state
         if (typeof isChecked !== "undefined") {
             itemToUpdate.isChecked = isChecked;
         }
 
+        // Updating actual item by replacing it with a ew one
         shoppingList.items.splice(itemIndex, 1, itemToUpdate);
+
         await shoppingList.save();
         //console.log("updatedList", shoppingList);
         return res.status(200).send({ success: true });
@@ -66,6 +58,7 @@ export const editItem = async (req, res) => {
     }
 };
 
+// Deleting Item in Shopping List
 export const deleteItem = async (req, res) => {
     try {
         const listId = req.params.id;

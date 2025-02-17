@@ -8,7 +8,7 @@ const Start = () => {
         <div className="start-container">
             <div className="start-container-img">
                 <img
-                    src="../../../public/images/shoppingBags_1280.jpg"
+                    src="../../../images/shoppingBags_1280.jpg"
                     alt="start-photo"
                 />
             </div>

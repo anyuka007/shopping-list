@@ -110,7 +110,7 @@ const SignUp = () => {
             <div className="signup-container-img">
                 <img
                     className="signup-container-img"
-                    src="../../../public/images/pexels-lum3n-44775-1410226.jpg"
+                    src="../../../images/pexels-lum3n-44775-1410226.jpg"
                     alt="start-photo"
                 />
             </div>

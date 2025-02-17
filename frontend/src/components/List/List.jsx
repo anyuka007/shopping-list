@@ -19,6 +19,9 @@ const List = ({ list, setUserLists }) => {
 
     const token = localStorage.getItem("token");
 
+    // *** Handling outside input field click
+
+    // Clears error message when the user clicks outside the input field
     useEffect(() => {
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
@@ -26,7 +29,7 @@ const List = ({ list, setUserLists }) => {
         };
     }, []);
 
-    //function checks if the click event occurred outside of the input field referenced by newItemInputRef
+    // Checks if the click event occurred outside of the input field referenced by newItemInputRef
     const handleClickOutside = (event) => {
         if (
             newItemInputRef.current &&
@@ -35,6 +38,8 @@ const List = ({ list, setUserLists }) => {
             setError("");
         }
     };
+
+    // *** Renaming List
 
     const listNewNameInputHandler = (e) => {
         setListName(e.target.value);
@@ -76,8 +81,10 @@ const List = ({ list, setUserLists }) => {
         return data;
     };
 
+    // *** Deleting List
+
     const deleteHandler = async () => {
-        console.log("list is deleted");
+        //console.log("list is deleted");
         await deleteList();
         const updatedLists = await fetchUsersLists();
         setUserLists(updatedLists);
@@ -107,6 +114,8 @@ const List = ({ list, setUserLists }) => {
         }
         return data;
     };
+
+    // ***Adding new Item to the List
 
     const inputHandler = (event) => {
         setError("");
