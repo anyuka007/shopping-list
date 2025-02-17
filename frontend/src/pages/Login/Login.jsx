@@ -78,8 +78,29 @@ const Login = () => {
 
         // Check if there are no errors
         if (Object.keys(errors).length === 0) {
-            await loginUser(formData.email, formData.password);
-            navigate("/");
+            //await loginUser(formData.email, formData.password);
+            const loginError = await loginUser(
+                formData.email,
+                formData.password
+            );
+            console.log(loginError);
+            if (loginError === "User not found") {
+                //alert(loginError);
+                setFillingErrors((prevErrors) => ({
+                    ...prevErrors,
+                    email: loginError,
+                }));
+                return;
+            } else if (loginError === "Invalid password") {
+                //alert(loginError);
+                setFillingErrors((prevErrors) => ({
+                    ...prevErrors,
+                    password: loginError,
+                }));
+                return;
+            } else {
+                navigate("/");
+            }
             //alert("User is logged");
             console.log(formData);
         }
