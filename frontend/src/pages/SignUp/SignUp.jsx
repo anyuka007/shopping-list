@@ -1,14 +1,16 @@
 import "../../css/SignUp.css";
 import { User, Mail, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
+import { loginUser } from "../../utils/login";
 
 const SignUp = () => {
     const [formData, setFormData] = useState({});
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [validationErrors, setValidationErrors] = useState({});
+    const navigate = useNavigate();
 
     const inputHandler = (event, property) => {
         setValidationErrors((prevState) => ({ ...prevState, [property]: "" }));
@@ -44,6 +46,7 @@ const SignUp = () => {
                 throw new Error("Error creating user");
             } else {
                 console.log("User created successfully:", data);
+                //navigate("/");
             }
         } catch (error) {
             console.error(
@@ -53,7 +56,7 @@ const SignUp = () => {
         }
     };
 
-    const createUserHandler = (event) => {
+    const createUserHandler = async (event) => {
         event.preventDefault();
         let errors = {};
 
@@ -99,9 +102,11 @@ const SignUp = () => {
 
         // Check if there are no errors
         if (Object.keys(errors).length === 0) {
-            createUser();
+            await createUser();
+            await loginUser(formData.email, formData.password);
+            navigate("/");
             //alert("User is created");
-            console.log(formData);
+            //console.log(formData);
         }
     };
 

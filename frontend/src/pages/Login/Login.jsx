@@ -3,6 +3,7 @@ import { Mail, Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
+import { loginUser } from "../../utils/login";
 
 const Login = () => {
     const [formData, setFormData] = useState({});
@@ -18,7 +19,7 @@ const Login = () => {
         }));
     };
 
-    const loginUser = async () => {
+    /* export const loginUser = async () => {
         const requestOptions = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -57,9 +58,9 @@ const Login = () => {
                 error
             );
         }
-    };
+    }; */
 
-    const loginHandler = (event) => {
+    const loginHandler = async (event) => {
         event.preventDefault();
         let errors = {};
 
@@ -77,7 +78,8 @@ const Login = () => {
 
         // Check if there are no errors
         if (Object.keys(errors).length === 0) {
-            loginUser();
+            await loginUser(formData.email, formData.password);
+            navigate("/");
             //alert("User is logged");
             console.log(formData);
         }

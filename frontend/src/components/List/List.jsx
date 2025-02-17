@@ -1,7 +1,5 @@
 /* eslint-disable react/prop-types */
 import "./List.css";
-/* import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan } from "@fortawesome/free-regular-svg-icons"; */
 import { Pencil, Trash2, Plus, Check, X } from "lucide-react";
 import ListItem from "./ListItem.jsx";
 import { useEffect, useRef, useState } from "react";
@@ -19,7 +17,7 @@ const List = ({ list, setUserLists }) => {
 
     const token = localStorage.getItem("token");
 
-    // *** Handling outside input field click
+    // *** Handling click outside the input field
 
     // Clears error message when the user clicks outside the input field
     useEffect(() => {
