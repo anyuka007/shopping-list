@@ -51,14 +51,20 @@
     white-space: normal; /* Allow text to wrap to the next line */
 }
 
-.list-name:hover {
-    font-size: 1.8rem;
-    font-weight: 600;
+.list-name h3:hover {
+    /* font-size: 1.8rem; */
     color: #555;
+    transform: scale(1.1);
+}
+
+.list-name-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .list-icon {
-    margin-left: 1.2rem;
+    margin-left: 1rem;
     width: 2rem;
     cursor: pointer;
     color: #888;

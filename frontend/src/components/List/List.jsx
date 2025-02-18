@@ -181,6 +181,7 @@ const List = ({ list, setUserLists }) => {
                         <input
                             className="list-new-name-input"
                             type="text"
+                            maxLength="18"
                             placeholder={list.title}
                             value={listName}
                             onChange={listNewNameInputHandler}
@@ -190,11 +191,11 @@ const List = ({ list, setUserLists }) => {
                         />
                     )}
                 </div>
-                <div>
+                <div className="list-name-icons">
                     {!editMode ? (
                         <>
                             <Pencil
-                                className="list-item-icon"
+                                className="list-icon"
                                 onClick={() => {
                                     {
                                         setEditMode(true);
@@ -202,7 +203,7 @@ const List = ({ list, setUserLists }) => {
                                 }}
                             />
                             <Trash2
-                                className="list-item-icon"
+                                className="list-icon"
                                 onClick={deleteHandler}
                             />{" "}
                         </>
@@ -224,6 +225,7 @@ const List = ({ list, setUserLists }) => {
                 <input
                     ref={newItemInputRef}
                     type="text"
+                    maxLength="18"
                     placeholder="Add new item"
                     value={newItemName}
                     onChange={inputHandler}

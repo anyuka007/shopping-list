@@ -125,6 +125,7 @@ const ListItem = ({ item, setUserLists, list }) => {
                     <input
                         className="list-item-new-name-input"
                         type="text"
+                        maxLength="18"
                         placeholder={item.name}
                         value={newName}
                         onChange={newNameInputHandler}
