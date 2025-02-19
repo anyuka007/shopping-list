@@ -10,6 +10,7 @@ const ListItem = ({ item, setUserLists, list }) => {
     const [isChecked, setIsChecked] = useState(item.isChecked);
     const [editMode, setEditMode] = useState(false);
     const [newName, setNewName] = useState(item.name);
+    const [fullText, setFullText] = useState(false);
     const navigate = useNavigate();
 
     const itemIndex = list.items.indexOf(item);
@@ -117,7 +118,15 @@ const ListItem = ({ item, setUserLists, list }) => {
                             onChange={checkboxChangeHandler}
                         />
 
-                        <p onDoubleClick={() => setEditMode(true)}>
+                        <p
+                            className={
+                                fullText ? "list-item-name-full-text" : ""
+                            }
+                            onDoubleClick={() => setEditMode(true)}
+                            onClick={() => {
+                                setFullText(!fullText);
+                            }}
+                        >
                             {item.name}
                         </p>
                     </>
@@ -125,7 +134,7 @@ const ListItem = ({ item, setUserLists, list }) => {
                     <input
                         className="list-item-new-name-input"
                         type="text"
-                        maxLength="18"
+                        maxLength="50"
                         placeholder={item.name}
                         value={newName}
                         onChange={newNameInputHandler}

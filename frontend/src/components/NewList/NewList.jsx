@@ -92,7 +92,7 @@ const NewList = ({ setUserLists }) => {
                     <input
                         ref={newListNameInputRef}
                         type="text"
-                        maxLength="18"
+                        maxLength="30"
                         placeholder="Name of the list"
                         value={listTitle}
                         onChange={inputHandler}

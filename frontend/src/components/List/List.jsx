@@ -12,6 +12,7 @@ const List = ({ list, setUserLists }) => {
     const [error, setError] = useState("");
     const [listName, setListName] = useState(list.title);
     const [editMode, setEditMode] = useState(false);
+    const [fullText, setFullText] = useState(false);
     const navigate = useNavigate();
     const newItemInputRef = useRef(null);
 
@@ -172,16 +173,24 @@ const List = ({ list, setUserLists }) => {
     return (
         <div className="list-container">
             <div className="list-name">
-                <div>
+                <div className="list-name-left">
                     {!editMode ? (
-                        <h3 onDoubleClick={() => setEditMode(true)}>
+                        <h3
+                            className={fullText ? "list-name-full-text" : ""}
+                            onDoubleClick={() => setEditMode(true)}
+                            onClick={() => {
+                                setFullText(!fullText);
+                                console.log("1 click");
+                                console.log("full Text", fullText);
+                            }}
+                        >
                             {list.title}
                         </h3>
                     ) : (
                         <input
                             className="list-new-name-input"
                             type="text"
-                            maxLength="18"
+                            maxLength="30"
                             placeholder={list.title}
                             value={listName}
                             onChange={listNewNameInputHandler}
@@ -225,7 +234,7 @@ const List = ({ list, setUserLists }) => {
                 <input
                     ref={newItemInputRef}
                     type="text"
-                    maxLength="18"
+                    maxLength="50"
                     placeholder="Add new item"
                     value={newItemName}
                     onChange={inputHandler}
