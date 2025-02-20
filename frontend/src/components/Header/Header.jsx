@@ -11,8 +11,14 @@ const Header = () => {
     return (
         <div className="header-container">
             <div className="header-left">
-                <p>Plan better, Shop Smarter</p>
+                <img
+                    /* src="./../../../public/images/APLists.png" */
+                    src="./../../../public/images/Logo.png"
+                    alt="Logo"
+                    style={{ width: "100px" }}
+                />
             </div>
+            <p>Plan better, Shop Smarter</p>
             {/*  it is only displayed if the pathname is  "/". */}
             {location.pathname === "/" && (
                 <div className="header-right">
