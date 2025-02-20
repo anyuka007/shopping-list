@@ -5,7 +5,7 @@ import ListItem from "./ListItem.jsx";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchUsersLists } from "../../utils/fetchLists.js";
-import { isTokenValid } from "../../utils/checkToken.js";
+import { isTokenValid, clearLocalStorage } from "../../utils/checkToken.js";
 
 const List = ({ list, setUserLists }) => {
     const [newItemName, setNewItemName] = useState("");
@@ -55,8 +55,16 @@ const List = ({ list, setUserLists }) => {
     const editListName = async () => {
         const listId = list._id;
         if (!token || !isTokenValid(token)) {
+            clearLocalStorage();
+            navigate("/login");
+        }
+        if (!token || !isTokenValid(token)) {
             navigate("/login");
             throw new Error("No token found");
+        }
+        if (!token || !isTokenValid(token)) {
+            clearLocalStorage();
+            navigate("/login");
         }
         const requestOptions = {
             method: "PATCH",
@@ -92,8 +100,8 @@ const List = ({ list, setUserLists }) => {
     const deleteList = async () => {
         const listId = list._id;
         if (!token || !isTokenValid(token)) {
+            clearLocalStorage();
             navigate("/login");
-            throw new Error("No token found");
         }
         const requestOptions = {
             method: "DELETE",
@@ -137,9 +145,9 @@ const List = ({ list, setUserLists }) => {
         const listId = list._id;
 
         //const listId = list._id
-        if (!token) {
+        if (!token || !isTokenValid(token)) {
+            clearLocalStorage();
             navigate("/login");
-            throw new Error("No token found");
         }
         const requestOptions = {
             method: "POST",
