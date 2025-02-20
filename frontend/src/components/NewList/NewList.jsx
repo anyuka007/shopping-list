@@ -102,15 +102,14 @@ const NewList = ({ setUserLists }) => {
                     />
                     {error && <p className="form-validation-error">{error}</p>}
                 </div>
-
-                <div className="new-list-button-container">
-                    <Button
-                        text="Create New List"
-                        /* width="250px" */
-                        /* fontSize="16px" */
-                        onClickHandler={createListHandler}
-                    />
-                </div>
+            </div>
+            <div className="new-list-button-container">
+                <Button
+                    text="Create New List"
+                    /* width="250px" */
+                    /* fontSize="16px" */
+                    onClickHandler={createListHandler}
+                />
             </div>
         </div>
     );

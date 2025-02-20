@@ -20,13 +20,12 @@ const Home = () => {
     }, []);
 
     useEffect(() => {
-        const getLists = async () => {
-            const lists = await fetchUsersLists();
-            setUserLists(lists);
-            //console.log("lists", lists);
-        };
         if (token) {
-            getLists();
+            (async () => {
+                const lists = await fetchUsersLists();
+                setUserLists(lists);
+                //console.log("lists", lists);
+            })();
         }
     }, [token]);
 
@@ -34,13 +33,6 @@ const Home = () => {
         <div className="home-container">
             <section className="home-welcome-text">
                 <h1>Welcome to Your Shopping Assistant!</h1>
-                {/* <h1>{`${userName}! Welcome to Your Shopping Assistant!`}</h1> */}
-                {/* <div className="home-welcome-text-description">
-                    <h3>Plan your shopping with ease and convenience</h3>
-                    <h3>
-                        Add items to your lists, stay organized, and save time!
-                    </h3>
-                </div> */}
                 <div className="home-welcome-text-description">
                     <h3>
                         Add items to your lists, stay organized, and save time!
