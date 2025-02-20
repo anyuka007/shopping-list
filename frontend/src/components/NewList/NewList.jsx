@@ -1,16 +1,16 @@
 import { useEffect, useState, useRef } from "react";
 import "./NewList.css";
-import { clearLocalStorage, isTokenValid } from "../../utils/checkToken";
-import { useNavigate } from "react-router-dom";
+import { isTokenValid } from "../../utils/checkToken";
 import { fetchUsersLists } from "../../utils/fetchLists";
 import Button from "../Button/Button";
+import { useLogout } from "../../utils/useLogout";
 
 // eslint-disable-next-line react/prop-types
 const NewList = ({ setUserLists }) => {
     const [listTitle, setListTitle] = useState("");
     const [error, setError] = useState("");
-    const navigate = useNavigate();
     const newListNameInputRef = useRef(null);
+    const logout = useLogout();
 
     useEffect(() => {
         document.addEventListener("mousedown", handleClickOutside);
@@ -53,8 +53,7 @@ const NewList = ({ setUserLists }) => {
     const createList = async () => {
         const token = localStorage.getItem("token");
         if (!token || !isTokenValid(token)) {
-            clearLocalStorage();
-            navigate("/login");
+            logout();
         }
         const requestOptions = {
             method: "POST",

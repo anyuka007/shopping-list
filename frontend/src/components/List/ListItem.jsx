@@ -2,16 +2,16 @@
 import { Pencil, Trash2, Check, X } from "lucide-react";
 import "./ListItem.css";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { fetchUsersLists } from "../../utils/fetchLists";
 import { isTokenValid } from "../../utils/checkToken";
+import { useLogout } from "../../utils/useLogout";
 
 const ListItem = ({ item, setUserLists, list }) => {
     const [isChecked, setIsChecked] = useState(item.isChecked);
     const [editMode, setEditMode] = useState(false);
     const [newName, setNewName] = useState(item.name);
     const [fullText, setFullText] = useState(false);
-    const navigate = useNavigate();
+    const logout = useLogout();
 
     const itemIndex = list.items.indexOf(item);
     const token = localStorage.getItem("token");
@@ -45,8 +45,7 @@ const ListItem = ({ item, setUserLists, list }) => {
     const editItem = async (changes) => {
         const listId = list._id;
         if (!token || !isTokenValid(token)) {
-            navigate("/login");
-            throw new Error("No token found");
+            logout();
         }
         const requestOptions = {
             method: "PATCH",
@@ -80,8 +79,7 @@ const ListItem = ({ item, setUserLists, list }) => {
     const deleteItem = async () => {
         const listId = list._id;
         if (!token || !isTokenValid(token)) {
-            navigate("/login");
-            throw new Error("No token found");
+            logout();
         }
         const requestOptions = {
             method: "PUT",

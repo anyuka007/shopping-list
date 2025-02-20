@@ -3,9 +3,9 @@ import "./List.css";
 import { Pencil, Trash2, Plus, Check, X } from "lucide-react";
 import ListItem from "./ListItem.jsx";
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { fetchUsersLists } from "../../utils/fetchLists.js";
-import { isTokenValid, clearLocalStorage } from "../../utils/checkToken.js";
+import { isTokenValid } from "../../utils/checkToken.js";
+import { useLogout } from "../../utils/useLogout.js";
 
 const List = ({ list, setUserLists }) => {
     const [newItemName, setNewItemName] = useState("");
@@ -13,7 +13,7 @@ const List = ({ list, setUserLists }) => {
     const [listName, setListName] = useState(list.title);
     const [editMode, setEditMode] = useState(false);
     const [fullText, setFullText] = useState(false);
-    const navigate = useNavigate();
+    const logout = useLogout();
     const newItemInputRef = useRef(null);
 
     const token = localStorage.getItem("token");
@@ -55,16 +55,7 @@ const List = ({ list, setUserLists }) => {
     const editListName = async () => {
         const listId = list._id;
         if (!token || !isTokenValid(token)) {
-            clearLocalStorage();
-            navigate("/login");
-        }
-        if (!token || !isTokenValid(token)) {
-            navigate("/login");
-            throw new Error("No token found");
-        }
-        if (!token || !isTokenValid(token)) {
-            clearLocalStorage();
-            navigate("/login");
+            logout();
         }
         const requestOptions = {
             method: "PATCH",
@@ -100,8 +91,7 @@ const List = ({ list, setUserLists }) => {
     const deleteList = async () => {
         const listId = list._id;
         if (!token || !isTokenValid(token)) {
-            clearLocalStorage();
-            navigate("/login");
+            logout();
         }
         const requestOptions = {
             method: "DELETE",
@@ -146,8 +136,7 @@ const List = ({ list, setUserLists }) => {
 
         //const listId = list._id
         if (!token || !isTokenValid(token)) {
-            clearLocalStorage();
-            navigate("/login");
+            logout();
         }
         const requestOptions = {
             method: "POST",

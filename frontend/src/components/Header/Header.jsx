@@ -1,19 +1,12 @@
-//import { clearLocalStorage } from "../../utils/checkToken";
 import { useLogout } from "../../utils/useLogout";
 import Button from "../Button/Button";
 import "./Header.css";
-import { useLocation /* useNavigate */ } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const Header = () => {
     const location = useLocation();
     const logout = useLogout();
     const userName = localStorage.getItem("username");
-    //const navigate = useNavigate();
-
-    /* const logoutHandler = () => {
-        navigate("/login");
-        clearLocalStorage();
-    }; */
 
     return (
         <div className="header-container">
@@ -26,7 +19,6 @@ const Header = () => {
                     <div>{`Hello, ${userName}`}</div>
                     <div>
                         <Button
-                            /* onClickHandler={logoutHandler} */
                             onClickHandler={logout}
                             height="4rem"
                             text="Log Out"
