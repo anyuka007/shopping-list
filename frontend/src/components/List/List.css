@@ -10,7 +10,7 @@
     background: #fefaf3;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
     border-radius: 20px;
-    background: #fefaf3;
+    background: var(--primary-color);
     box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
 
     margin: 1rem;
@@ -41,9 +41,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.2rem 2rem;
+    padding: 1.5rem 2rem;
     margin: 0 0 1.2rem 0;
-    background-color: #f28482;
+    background-color: var(--tertiary-color);
     color: #f7ede2;
     max-width: 100%;
     /* word-wrap: break-word;
@@ -104,10 +104,10 @@
 
 .list-new-item input {
     width: 100%;
-    padding: 10px;
+    padding: 10px 0;
     /* border-bottom: 1px solid #ccc; */
     border: none;
-    border-bottom: 1px solid #84a59d;
+    border-bottom: 1px solid var(--secondary-color);
     /* background-color: #fffcf7; */
     background-color: inherit;
     font-size: 16px;
@@ -116,14 +116,14 @@
 
 .list-new-item input:focus {
     border-color: #fff;
-    border-bottom: 1px solid #84a59d;
+    border-bottom: 1px solid var(--secondary-color);
     outline: none;
 }
 
 .plus-icon {
     width: 2.5rem;
     color: #a2a2a2;
-    color: #84a59d;
+    color: var(--secondary-color);
 }
 
 .plus-icon:hover {

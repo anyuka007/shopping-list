@@ -38,7 +38,7 @@
 .login-input-field {
     width: 30rem;
     height: 4rem;
-    border: 1px solid #84a59d;
+    border: 1px solid var(--secondary-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -47,7 +47,7 @@
 }
 
 .input-icon {
-    color: #84a59d;
+    color: var(--secondary-color);
     width: 2rem;
 }
 

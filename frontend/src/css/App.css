@@ -6,6 +6,9 @@
 
 :root {
     font-size: 62.5%;
+    --primary-color: #fefaf3;
+    --secondary-color: #84a59d;
+    --tertiary-color: #f28482;
 }
 
 #root {
@@ -16,7 +19,7 @@ body {
     font-size: 1.6rem;
     height: 100%;
     font-family: "Roboto", serif;
-    background-color: #fefaf3;
+    background-color: var(--primary-color);
     /* background-color: #f7ede2; */
 }
 
@@ -36,11 +39,12 @@ body {
 
 .form-validation-error {
     font-size: 1.2rem;
-    color: red;
+    font-weight: 600;
+    color: var(--tertiary-color);
 }
 
 .nav-link {
-    color: #f28482;
+    color: var(--tertiary-color);
 }
 .nav-link:hover {
     font-weight: 600;

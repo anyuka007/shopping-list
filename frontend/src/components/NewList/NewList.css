@@ -6,7 +6,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
 
     border-radius: 20px;
-    background: #fefaf3;
+    background: var(--primary-color);
     box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
     padding: 2rem;
 }
@@ -34,7 +34,7 @@
     padding: 10px;
     /* border-bottom: 1px solid #ccc; */
     border: none;
-    border-bottom: 1px solid #84a59d;
+    border-bottom: 1px solid var(--secondary-color);
     /* background-color: #fffcf7; */
     background-color: inherit;
     font-size: 16px;
@@ -43,27 +43,10 @@
 
 .new-list-name-input-container input:focus {
     border-color: #fff;
-    border-bottom: 1px solid #84a59d;
+    border-bottom: 1px solid var(--secondary-color);
     outline: none;
 }
 
 .new-list-button-container {
     width: 100%;
 }
-
-/* .new-list-button-container button {
-    background-color: #efefef;
-    background-color: #84a59d;
-    width: 100%;
-    height: 50px;
-    font-size: 14px;
-    margin-bottom: 2rem;
-    border: 1px solid #dcdcdc;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.new-list-button-container button:hover {
-    background-color: #bdb8b0;
-} */
