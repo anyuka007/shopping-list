@@ -83,7 +83,7 @@
 
 .list-name h3:hover {
     color: #555;
-    transform: scale(1.1);
+    /* transform: scale(1.1); */
 }
 
 .list-new-name-input,
