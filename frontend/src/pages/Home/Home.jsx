@@ -32,18 +32,14 @@ const Home = () => {
     return (
         <div className="home-container">
             <section className="home-welcome-text">
-                <h1>Welcome to Your Shopping Assistant!</h1>
-                <div className="home-welcome-text-description">
-                    <h3>
-                        Add items to your lists, stay organized, and save time!
-                    </h3>
-                </div>
-                <h4>
+                <h1>Welcome to Your Shopping Assistant</h1>
+                <h4>Add items to your lists, stay organized and save time!</h4>
+                <p>
                     {!userLists.length
                         ? `Ready to get started? Let’s create your
                     first list!`
                         : `You have ${userLists.length} lists`}
-                </h4>
+                </p>
             </section>
             <section className="home-lists">
                 <div className="home-lists-container">

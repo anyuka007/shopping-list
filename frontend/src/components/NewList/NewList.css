@@ -1,10 +1,6 @@
 .new-list-container {
-    width: 300px;
-    height: 300px;
-    /* border-radius: 20px;
-    background: #fefaf3;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
-
+    width: 350px;
+    height: 150px;
     border-radius: 20px;
     background: var(--primary-color);
     box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
@@ -49,4 +45,10 @@
 
 .new-list-button-container {
     width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+    .new-list-container {
+        height: 350px;
+    }
 }
