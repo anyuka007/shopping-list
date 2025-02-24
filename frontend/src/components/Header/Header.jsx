@@ -2,6 +2,7 @@ import { useLogout } from "../../utils/useLogout";
 import Button from "../Button/Button";
 import "./Header.css";
 import { useLocation } from "react-router-dom";
+import { LogOut } from "lucide-react";
 
 const Header = () => {
     const location = useLocation();
@@ -15,19 +16,22 @@ const Header = () => {
                     /* src="./../../../public/images/APLists.png" */
                     src="./../../../public/images/Logo.png"
                     alt="Logo"
-                    style={{ width: "100px" }}
                 />
             </div>
             <p>Plan better, Shop Smarter</p>
             {/*  it is only displayed if the pathname is  "/". */}
             {location.pathname === "/" && (
                 <div className="header-right">
-                    <div>{`Hello, ${userName}`}</div>
+                    <div className="header-username">{`Hello, ${userName}`}</div>
                     <div>
                         <Button
                             onClickHandler={logout}
                             height="4rem"
                             text="Log Out"
+                        />
+                        <LogOut
+                            className="header-logout-icon"
+                            onClick={logout}
                         />
                     </div>
                 </div>
