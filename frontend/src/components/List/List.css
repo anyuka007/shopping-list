@@ -159,12 +159,6 @@
 }
 
 @media screen and (min-width: 768px) {
-    .short-list-container {
-        /*  display: none; */
-    }
-    .list-container {
-        display: block;
-    }
     .chevron-up-wrapper,
     .chevron-down {
         display: none;
