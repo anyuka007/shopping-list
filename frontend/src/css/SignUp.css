@@ -15,9 +15,7 @@
 }
 
 .signup-container-form {
-    /*  width: 50%; */
     flex-basis: 35%;
-    /* border: 1px solid black; */
     display: flex;
     flex-direction: column;
     align-items: center;

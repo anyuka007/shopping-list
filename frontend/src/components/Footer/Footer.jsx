@@ -1,8 +1,11 @@
-import React from "react";
 import "./Footer.css";
 
 const Footer = () => {
-    return <div className="footer">Developed by Anna Popova, 2025</div>;
+    return (
+        <div className="footer">
+            <p>Developed by Anna Popova, 2025</p>
+        </div>
+    );
 };
 
 export default Footer;

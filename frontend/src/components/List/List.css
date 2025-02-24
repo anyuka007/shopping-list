@@ -3,16 +3,11 @@
 .list-container {
     width: 300px;
     height: 300px;
-
     overflow: hidden;
     overflow-y: auto;
-    /* border-radius: 20px;
-    background: #fefaf3;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
     border-radius: 20px;
     background: var(--primary-color);
     box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
-
     margin: 1rem;
 }
 
@@ -46,9 +41,6 @@
     background-color: var(--tertiary-color);
     color: #f7ede2;
     max-width: 100%;
-    /* word-wrap: break-word;
-    word-break: break-word;
-    white-space: normal;  */
 }
 
 .list-name-left {
@@ -72,6 +64,21 @@
 .list-name h3:hover {
     color: #555;
     transform: scale(1.1);
+}
+
+.list-new-name-input,
+.list-new-item input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid var(--secondary-color);
+    background-color: inherit;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.list-new-name-input:focus,
+.list-new-item input:focus {
+    outline: none;
 }
 
 .list-name-icons {
@@ -99,25 +106,6 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 2rem;
-    /* margin: 1.2rem 0; */
-}
-
-.list-new-item input {
-    width: 100%;
-    padding: 10px 0;
-    /* border-bottom: 1px solid #ccc; */
-    border: none;
-    border-bottom: 1px solid var(--secondary-color);
-    /* background-color: #fffcf7; */
-    background-color: inherit;
-    font-size: 16px;
-    transition: border-color 0.3s ease;
-}
-
-.list-new-item input:focus {
-    border-color: #fff;
-    border-bottom: 1px solid var(--secondary-color);
-    outline: none;
 }
 
 .plus-icon {

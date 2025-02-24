@@ -9,6 +9,7 @@
     --primary-color: #fefaf3;
     --secondary-color: #84a59d;
     --tertiary-color: #f28482;
+    --text-color: #444;
 }
 
 #root {
@@ -17,10 +18,10 @@
 
 body {
     font-size: 1.6rem;
+    color: var(--text-color);
     height: 100%;
     font-family: "Roboto", serif;
     background-color: var(--primary-color);
-    /* background-color: #f7ede2; */
 }
 
 .whole-page {
@@ -28,13 +29,14 @@ body {
     width: 100%;
     display: flex;
     flex-direction: column;
-    padding: 3rem;
+    /*  padding: 3rem; */
 }
 
 .main-container {
     flex: 1 1 auto;
-    border-top: 2px solid black;
-    border-bottom: 2px solid black;
+    border-top: 2px solid #666 /*  var(--text-color) */;
+    /* border-bottom: 2px solid #666; */
+    margin: 0 3rem;
 }
 
 .form-validation-error {
