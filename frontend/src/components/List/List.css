@@ -26,7 +26,7 @@
     box-shadow: 10px 10px 30px #bebebe, -10px -10px 30px #ffffff;
     margin-top: 2rem;
     display: flex;
-    flex-direction: column; /* Ensure children are stacked vertically */
+    flex-direction: column;
     justify-content: flex-start; /* Align children to the top */
 }
 
@@ -52,7 +52,6 @@
 }
 
 .list-whole-list {
-    position: relative;
     height: 100%;
     width: 100%;
 }
@@ -66,6 +65,8 @@
     background-color: var(--tertiary-color);
     color: #f7ede2;
     max-width: 100%;
+    position: sticky;
+    top: 0;
 }
 
 .list-name-left {
@@ -156,7 +157,6 @@
     align-items: center;
     padding: 1rem;
     position: sticky;
-    /* inset: 300px 0 0 0; */
     top: 300px;
     bottom: 0;
     background: var(--primary-color);
