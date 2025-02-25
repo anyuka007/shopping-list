@@ -49,6 +49,12 @@
     width: 100%;
 }
 
+@media screen and (max-width: 400px) {
+    .new-list-container {
+        width: 320px;
+    }
+}
+
 @media screen and (min-width: 768px) {
     .new-list-container {
         height: 350px;

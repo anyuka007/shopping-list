@@ -54,6 +54,7 @@
 .list-whole-list {
     position: relative;
     height: 100%;
+    width: 100%;
 }
 
 .list-name {
@@ -155,12 +156,22 @@
     align-items: center;
     padding: 1rem;
     position: sticky;
+    /* inset: 300px 0 0 0; */
+    top: 300px;
     bottom: 0;
-    /*  left: 50%; */
-    transform: translateX(0); /* Center horizontally */
     background: var(--primary-color);
     z-index: 1;
     width: 100%;
+}
+
+@media screen and (max-width: 400px) {
+    .short-list-container {
+        width: 320px;
+    }
+    .list-container {
+        width: 320px;
+        height: 320px;
+    }
 }
 
 @media screen and (min-width: 768px) {
