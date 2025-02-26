@@ -14,6 +14,7 @@ import { useEffect, useRef, useState } from "react";
 import { fetchUsersLists } from "../../utils/fetchLists.js";
 import { isTokenValid } from "../../utils/checkToken.js";
 import { useLogout } from "../../utils/useLogout.js";
+import { fetchList } from "../../utils/fetchList.js";
 
 const isScreenLarge = window.innerWidth >= 768;
 
@@ -54,6 +55,8 @@ const List = ({ list, setUserLists }) => {
         };
     }, []);
 
+    //console.log("List name: ", list.title);
+
     // Checks if the click event occurred outside of the input field referenced by newItemInputRef
     const handleClickOutside = (event) => {
         if (
@@ -73,8 +76,14 @@ const List = ({ list, setUserLists }) => {
 
     const saveNewNameHandler = async () => {
         await editListName();
-        const updatedLists = await fetchUsersLists();
-        setUserLists(updatedLists);
+        /* const updatedLists = await fetchUsersLists(); setUserLists(updatedLists);*/
+        const updatedList = await fetchList(list._id);
+        setUserLists((prevLists) =>
+            prevLists.map((li) =>
+                li._id === updatedList._id ? updatedList : li
+            )
+        );
+
         setEditMode(false);
     };
 
@@ -151,9 +160,13 @@ const List = ({ list, setUserLists }) => {
             setError("Please fill this field");
         } else {
             await addNewItem();
-            const updatedLists = await fetchUsersLists();
+            const updatedList = await fetchList(list._id);
             setNewItemName("");
-            setUserLists(updatedLists);
+            setUserLists((prevLists) =>
+                prevLists.map((li) =>
+                    li._id === updatedList._id ? updatedList : li
+                )
+            );
         }
     };
 

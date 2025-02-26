@@ -6,6 +6,7 @@ import {
     editItem, */
     deleteShoppingList,
     editShoppingListsName,
+    getList,
     getUsersLists,
 } from "../controllers/shoppingListController.js";
 import { authorization } from "../middleware/authMiddleware.js";
@@ -19,6 +20,7 @@ shoppingListRouter
 
 shoppingListRouter
     .route("/:id")
+    .get(authorization, getList)
     .delete(authorization, deleteShoppingList)
     .post(authorization, addItemToShoppingList)
     .patch(authorization, editShoppingListsName);

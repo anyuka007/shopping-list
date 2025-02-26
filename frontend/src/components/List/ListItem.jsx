@@ -5,6 +5,7 @@ import { useState } from "react";
 import { fetchUsersLists } from "../../utils/fetchLists";
 import { isTokenValid } from "../../utils/checkToken";
 import { useLogout } from "../../utils/useLogout";
+import { fetchList } from "../../utils/fetchList";
 
 const ListItem = ({ item, setUserLists, list }) => {
     const [isChecked, setIsChecked] = useState(item.isChecked);
@@ -22,8 +23,14 @@ const ListItem = ({ item, setUserLists, list }) => {
         //console.log("listName", list.title);
         //console.log("itemName", item.name);
         await editItem({ isChecked: newCheckedState });
-        const updatedLists = await fetchUsersLists();
-        setUserLists(updatedLists);
+        /* const updatedLists = await fetchUsersLists();
+        setUserLists(updatedLists); */
+        const updatedList = await fetchList(list._id);
+        setUserLists((prevLists) =>
+            prevLists.map((li) =>
+                li._id === updatedList._id ? updatedList : li
+            )
+        );
     };
 
     const newNameInputHandler = (e) => {
@@ -37,8 +44,14 @@ const ListItem = ({ item, setUserLists, list }) => {
             return;
         }
         await editItem({ newName: newName });
-        const updatedLists = await fetchUsersLists();
-        setUserLists(updatedLists);
+        /* const updatedLists = await fetchUsersLists();
+        setUserLists(updatedLists); */
+        const updatedList = await fetchList(list._id);
+        setUserLists((prevLists) =>
+            prevLists.map((li) =>
+                li._id === updatedList._id ? updatedList : li
+            )
+        );
         setEditMode(false);
     };
 
@@ -72,8 +85,14 @@ const ListItem = ({ item, setUserLists, list }) => {
 
     const deleteItemHandler = async () => {
         await deleteItem();
-        const updatedLists = await fetchUsersLists();
-        setUserLists(updatedLists);
+        /* const updatedLists = await fetchUsersLists();
+        setUserLists(updatedLists); */
+        const updatedList = await fetchList(list._id);
+        setUserLists((prevLists) =>
+            prevLists.map((li) =>
+                li._id === updatedList._id ? updatedList : li
+            )
+        );
     };
 
     const deleteItem = async () => {
