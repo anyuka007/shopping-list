@@ -1,22 +1,23 @@
 .start-container {
     display: flex;
     justify-content: space-between;
-    margin-top: 2rem;
+    margin-top: 3rem;
     margin-bottom: 2rem;
 }
 
 .start-container-img {
-    width: 100%;
-    flex-basis: 60%;
+    display: none;
 }
 
 .start-container-img img {
     width: 100%;
+    height: auto;
+    object-fit: cover;
 }
 
 .start-container-text {
     width: 100%;
-    flex-basis: 35%;
+    /*  flex-basis: 35%; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,12 +25,24 @@
 }
 
 .start-container-text h1 {
-    margin-bottom: 7rem;
-    font-size: 3rem;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: var(--secondary-color);
+    text-align: center;
 }
-.start-description,
+.start-description {
+    margin-bottom: 2rem;
+}
+.start-description h3 {
+    font-size: 1.6rem;
+    text-align: center;
+    font-weight: 500;
+}
 .start-container-text h4 {
-    margin-bottom: 5rem;
+    margin-bottom: 3rem;
+    font-size: 1.4rem;
+    text-align: center;
+    font-weight: 400;
 }
 
 .start-container-buttons {
@@ -39,14 +52,39 @@
     gap: 4rem;
 }
 
-/* .start-container-buttons button {
-    background-color: #eef0ef;
-    width: 20rem;
-    height: 5rem;
-    font-size: 14px;
-    margin-right: 4rem;
+@media screen and (min-width: 768px) {
+    .start-container-img {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        flex-basis: 60%;
+    }
+
+    .start-container-img img {
+        width: 95%;
+    }
+
+    .start-container-text {
+        flex-basis: 35%;
+    }
 }
 
-.start-container-buttons button:hover {
-    background-color: #e3e3e3;
-} */
+@media screen and (min-width: 1024px) {
+    .login-container-img img {
+        width: 100%;
+    }
+    .start-container-text h1 {
+        font-size: 3rem;
+        margin-bottom: 5rem;
+    }
+    .start-description {
+        margin-bottom: 5rem;
+    }
+    .start-description h3 {
+        font-size: 2rem;
+    }
+    .start-container-text h4 {
+        margin-bottom: 5rem;
+        font-size: 1.8rem;
+    }
+}
