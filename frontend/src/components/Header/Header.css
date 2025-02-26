@@ -59,7 +59,7 @@
     }
 
     .header-right {
-        width: 30%;
+        max-width: 50%;
     }
 
     .header-right .button-component {
