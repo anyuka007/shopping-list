@@ -146,6 +146,7 @@ const SignUp = () => {
                                 type="text"
                                 name="firstname"
                                 id="firstname"
+                                maxLength="30"
                                 placeholder="first name"
                                 value={formData.firstname}
                                 onChange={(event) =>
@@ -167,6 +168,7 @@ const SignUp = () => {
                                 type="text"
                                 name="lastname"
                                 id="lastname"
+                                maxLength="50"
                                 placeholder="last name"
                                 value={formData.lastname}
                                 onChange={(event) =>

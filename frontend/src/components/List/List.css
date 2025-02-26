@@ -13,13 +13,11 @@
 .short-list-container:hover {
     background-color: #fffcf7;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    color: blue;
 }
 
 .list-container {
     width: 350px;
     height: 350px;
-    overflow: hidden;
     overflow-y: auto;
     border-radius: 20px;
     background: var(--primary-color);

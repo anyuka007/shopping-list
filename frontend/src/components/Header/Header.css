@@ -48,22 +48,18 @@
     .header-container p {
         display: block;
         text-transform: uppercase;
-        width: 60%;
+        width: 40%;
         text-align: center;
     }
     .header-left img {
         max-width: 100px;
     }
     .header-left {
-        width: 20%;
+        width: 30%;
     }
 
     .header-right {
-        width: 20%;
-    }
-
-    .header-username {
-        display: block;
+        width: 30%;
     }
 
     .header-right .button-component {
@@ -72,5 +68,21 @@
 
     .header-logout-icon {
         display: none;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .header-username {
+        display: block;
+        width: 50%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .header-username:hover {
+        white-space: normal;
+        overflow: visible;
+        word-break: break-word;
+        text-overflow: unset;
     }
 }
