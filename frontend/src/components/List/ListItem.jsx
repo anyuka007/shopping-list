@@ -2,13 +2,12 @@
 import { Pencil, Trash2, Check, X } from "lucide-react";
 import "./ListItem.css";
 import { useState } from "react";
-import { fetchUsersLists } from "../../utils/fetchLists";
+//import { fetchUsersLists } from "../../utils/fetchLists";
 import { isTokenValid } from "../../utils/checkToken";
 import { useLogout } from "../../utils/useLogout";
 import { fetchList } from "../../utils/fetchList";
 
 const ListItem = ({ item, setUserLists, list }) => {
-    const [isChecked, setIsChecked] = useState(item.isChecked);
     const [editMode, setEditMode] = useState(false);
     const [newName, setNewName] = useState(item.name);
     const [fullText, setFullText] = useState(false);
@@ -19,9 +18,7 @@ const ListItem = ({ item, setUserLists, list }) => {
 
     const checkboxChangeHandler = async (e) => {
         const newCheckedState = e.target.checked;
-        setIsChecked(newCheckedState);
-        //console.log("listName", list.title);
-        //console.log("itemName", item.name);
+
         await editItem({ isChecked: newCheckedState });
         /* const updatedLists = await fetchUsersLists();
         setUserLists(updatedLists); */
@@ -131,7 +128,7 @@ const ListItem = ({ item, setUserLists, list }) => {
                         <input
                             className="list-item-checkbox"
                             type="checkbox"
-                            checked={isChecked}
+                            checked={item.isChecked}
                             onChange={checkboxChangeHandler}
                         />
 
