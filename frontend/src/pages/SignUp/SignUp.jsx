@@ -39,7 +39,7 @@ const SignUp = () => {
         };
         try {
             const response = await fetch(
-                "http://localhost:5000/register",
+                "https://shoppinglist-ap.onrender.com/register",
                 requestOptions
             );
             const data = await response.json();

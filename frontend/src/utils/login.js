@@ -9,7 +9,7 @@ export const loginUser = async (email, password) => {
     };
     try {
         const response = await fetch(
-            "http://localhost:5000/login",
+            "https://shoppinglist-ap.onrender.com/login",
             requestOptions
         );
         const data = await response.json();

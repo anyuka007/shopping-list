@@ -9,7 +9,7 @@ export const fetchList = async (listId) => {
             },
         };
         const response = await fetch(
-            `http://localhost:5000/shoppinglist/${listId}`,
+            `https://shoppinglist-ap.onrender.com/shoppinglist/${listId}`,
             requestOptions
         );
 

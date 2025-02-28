@@ -69,7 +69,7 @@ const ListItem = ({ item, setUserLists, list }) => {
             }),
         };
         const response = await fetch(
-            `http://localhost:5000/items/${listId}`,
+            `https://shoppinglist-ap.onrender.com/items/${listId}`,
             requestOptions
         );
         const data = await response.json();
@@ -108,7 +108,7 @@ const ListItem = ({ item, setUserLists, list }) => {
             }),
         };
         const response = await fetch(
-            `http://localhost:5000/items/${listId}`,
+            `https://shoppinglist-ap.onrender.com/items/${listId}`,
             requestOptions
         );
 
