@@ -23,6 +23,8 @@
     font-size: 2rem;
     margin-top: 1rem;
     color: var(--secondary-color);
+    color: var(--tertiary-color);
+
 }
 
 .home-welcome-text h4 {
