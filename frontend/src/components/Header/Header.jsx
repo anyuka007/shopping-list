@@ -13,8 +13,8 @@ const Header = () => {
         <div className="header-container">
             <div className="header-left">
                 <img
-                    /* src="./../../../public/images/APLists.png" */
-                    src="./../../../public/images/Logo.png"
+                    /* src="./../../../images/APLists.png" */
+                    src="./../../../images/Logo.png"
                     alt="Logo"
                 />
             </div>
