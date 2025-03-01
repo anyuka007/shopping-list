@@ -17,7 +17,6 @@ export const authorization = async (req, res, next) => {
 
             // get user from token
             req.user = await User.findById(decoded.id).select("-password");
-            console.log("user", req.user);
             next();
         } catch (error) {
             return res

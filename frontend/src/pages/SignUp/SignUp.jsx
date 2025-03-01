@@ -48,7 +48,6 @@ const SignUp = () => {
                 response.status === 409 &&
                 data.message === "User already exists"
             ) {
-                //alert("User with such email already exists");
                 setValidationErrors((prevState) => ({
                     ...prevState,
                     email: "Email is already in use. Please log in",
@@ -58,8 +57,6 @@ const SignUp = () => {
                 throw new Error("Error creating user");
             } else {
                 success = true;
-                console.log("User created successfully:");
-                //navigate("/");
             }
             return success;
         } catch (error) {
@@ -121,9 +118,6 @@ const SignUp = () => {
                 await loginUser(formData.email, formData.password);
                 navigate("/");
             }
-            //
-            //alert("User is created");
-            //console.log(formData);
         }
     };
 

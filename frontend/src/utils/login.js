@@ -15,21 +15,17 @@ export const loginUser = async (email, password) => {
         const data = await response.json();
         let error = "";
         if (response.status === 401 && data.message === "Invalid credentials") {
-            //alert("Invalid password");
             error = "Invalid password";
         } else if (
             response.status === 404 &&
             data.message === "User not found"
         ) {
-            //alert("User not found");
             error = "User not found";
         } else if (!response.ok) {
             throw new Error("Error by login user");
         } else {
-            //console.log("User is logged", data);
             localStorage.setItem("token", data.token);
             localStorage.setItem("username", data.firstName);
-            // navigate("/");
         }
         return error;
     } catch (error) {

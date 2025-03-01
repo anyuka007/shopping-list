@@ -31,7 +31,6 @@ const ListItem = ({ item, setUserLists, list }) => {
     };
 
     const newNameInputHandler = (e) => {
-        console.log("newName ", newName);
         setNewName(e.target.value);
     };
 

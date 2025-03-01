@@ -18,7 +18,6 @@ export const fetchUsersLists = async () => {
         }
 
         const data = await response.json();
-        //console.log("users lists: ", data);
         return data;
     } catch (error) {
         console.error("Error fetching users lists:", error);

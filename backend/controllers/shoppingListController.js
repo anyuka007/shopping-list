@@ -3,9 +3,7 @@ import ShoppingList from "../models/ShoppingList.js";
 export const getUsersLists = async (req, res) => {
     try {
         const userId = req.user._id;
-        console.log("userId", userId);
         const usersLists = await ShoppingList.find({ user: userId });
-        console.log("usersLists", usersLists);
         return res.send(usersLists);
     } catch (error) {
         res.status(500).send(
@@ -17,7 +15,6 @@ export const getUsersLists = async (req, res) => {
 export const getList = async (req, res) => {
     try {
         const listId = req.params.id;
-        console.log("listID", listId);
 
         // Find the shopping list by ID
         const shoppingList = await ShoppingList.findById(listId);
@@ -35,21 +32,17 @@ export const getList = async (req, res) => {
 export const createShoppingList = async (req, res) => {
     try {
         const userId = req.user._id;
-        console.log("userID from request", userId._id);
         const { title } = req.body;
         const isExist = await ShoppingList.find({
             title: title,
             user: userId,
         });
-        console.log("isExist", isExist);
         if (isExist.length > 0) {
-            console.log("list exists");
             return res
                 .status(409)
                 .send({ message: "List with such title exists" });
         }
         const newList = await ShoppingList.create({ title, user: userId });
-        console.log("new List", newList);
         res.status(200).send(newList);
     } catch (error) {
         res.status(500).send(
@@ -61,9 +54,7 @@ export const createShoppingList = async (req, res) => {
 export const addItemToShoppingList = async (req, res) => {
     try {
         const listId = req.params.id;
-        console.log("listID", listId);
         const { name } = req.body;
-        console.log("new Item", name);
 
         // Find the shopping list by ID
         const shoppingList = await ShoppingList.findById(listId);
@@ -94,7 +85,6 @@ export const deleteShoppingList = async (req, res) => {
     try {
         const listId = req.params.id;
         await ShoppingList.findByIdAndDelete(listId);
-        console.log("listId", listId);
         res.status(200).send({ message: "list deleted" });
     } catch (error) {
         console.error("Error deleting shopping list: ", error);
@@ -105,9 +95,7 @@ export const deleteShoppingList = async (req, res) => {
 export const editShoppingListsName = async (req, res) => {
     try {
         const listId = req.params.id;
-        console.log("listId", listId);
         const { newName } = req.body;
-        console.log("newName", newName);
         await ShoppingList.findByIdAndUpdate(listId, {
             title: newName,
         });

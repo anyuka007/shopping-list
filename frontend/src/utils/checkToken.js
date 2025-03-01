@@ -5,7 +5,6 @@ export const isTokenValid = (token) => {
     try {
         const decoded = jwtDecode(token);
         const isValid = decoded.exp * 1000 > Date.now();
-        //console.log("isValid", isValid);
         return isValid;
     } catch (error) {
         return false;

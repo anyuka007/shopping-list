@@ -55,7 +55,6 @@ const List = ({ list, setUserLists }) => {
         };
     }, []);
 
-    //console.log("List name: ", list.title);
 
     // Checks if the click event occurred outside of the input field referenced by newItemInputRef
     const handleClickOutside = (event) => {
@@ -71,7 +70,6 @@ const List = ({ list, setUserLists }) => {
 
     const listNewNameInputHandler = (e) => {
         setListName(e.target.value);
-        console.log("new name of the list: ", listName);
     };
 
     const saveNewNameHandler = async () => {
@@ -117,7 +115,6 @@ const List = ({ list, setUserLists }) => {
     // *** Deleting List
 
     const deleteHandler = async () => {
-        //console.log("list is deleted");
         await deleteList();
         const updatedLists = await fetchUsersLists();
         setUserLists(updatedLists);
@@ -152,7 +149,6 @@ const List = ({ list, setUserLists }) => {
     const inputHandler = (event) => {
         setError("");
         setNewItemName(event.target.value);
-        // console.log("new item name", newItemName);
     };
 
     const addNewItemHandler = async () => {
@@ -250,8 +246,6 @@ const List = ({ list, setUserLists }) => {
                                         onDoubleClick={() => setEditMode(true)}
                                         onClick={() => {
                                             setFullText(!fullText);
-                                            console.log("1 click");
-                                            console.log("full Text", fullText);
                                         }}
                                     >
                                         {list.title}

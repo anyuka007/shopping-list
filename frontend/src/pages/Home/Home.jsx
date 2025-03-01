@@ -24,7 +24,6 @@ const Home = () => {
             (async () => {
                 const lists = await fetchUsersLists();
                 setUserLists(lists);
-                //console.log("lists", lists);
             })();
         }
     }, [token]);

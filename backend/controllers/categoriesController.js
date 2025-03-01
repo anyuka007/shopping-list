@@ -16,7 +16,7 @@ export const getCategory = async (req, res) => {
     try {
         const category = await Category.findById(id);
         if (!category) {
-            console.log("Category not found".red);
+            //console.log("Category not found".red);
             return res.status(404).send("Category not found");
         }
         return res.status(200).send(category);
@@ -33,7 +33,7 @@ export const addCategory = async (req, res) => {
 
         // Check if the body or the name field is missing
         if (!body || !body.name) {
-            console.log("Name is required".red);
+            //console.log("Name is required".red);
             return res.status(400).send("Name is required");
         }
 
@@ -49,7 +49,6 @@ export const addCategory = async (req, res) => {
         const newCategory = await Category.create({
             name: body.name.toLowerCase(),
         });
-        console.log(`New category '${body.name}' successfully added`);
         return res.status(200).send(newCategory);
     } catch (error) {
         console.log(`Error adding new category: ${error}`);

@@ -27,7 +27,6 @@ const Start = () => {
                 <div className="start-container-buttons">
                     <Button
                         className="start-container-button"
-                        /* onClick={() => alert("Log in")} */
                         onClickHandler={() => navigate("/login")}
                         width="20rem"
                         text="Log In"

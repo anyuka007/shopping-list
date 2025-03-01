@@ -18,7 +18,6 @@ export const fetchList = async (listId) => {
         }
 
         const data = await response.json();
-        console.log("list: ", data);
         return data;
     } catch (error) {
         console.error("Error fetching  list:", error);
