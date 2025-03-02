@@ -206,7 +206,11 @@ const SignUp = () => {
                                 name="password"
                                 id="password"
                                 placeholder="********"
-                                autoComplete="off"
+                                // autoComplete="off"
+                                readOnly
+                                onFocus={(e) => {
+                                    e.target.removeAttribute("readonly");
+                                }}
                                 value={formData.password}
                                 onChange={(event) => {
                                     inputHandler(event, "password");
@@ -240,7 +244,11 @@ const SignUp = () => {
                                 name="confirmpassword"
                                 id="confirmpassword"
                                 placeholder="********"
-                                autoComplete="off"
+                                // autoComplete="off"
+                                readOnly
+                                onFocus={(e) => {
+                                    e.target.removeAttribute("readonly");
+                                }}
                                 value={formData.confirmPassword}
                                 onChange={(event) => {
                                     inputHandler(event, "confirmPassword");
