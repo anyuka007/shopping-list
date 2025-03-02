@@ -206,6 +206,7 @@ const SignUp = () => {
                                 name="password"
                                 id="password"
                                 placeholder="********"
+                                autoComplete="off"
                                 value={formData.password}
                                 onChange={(event) => {
                                     inputHandler(event, "password");
@@ -239,6 +240,7 @@ const SignUp = () => {
                                 name="confirmpassword"
                                 id="confirmpassword"
                                 placeholder="********"
+                                autoComplete="off"
                                 value={formData.confirmPassword}
                                 onChange={(event) => {
                                     inputHandler(event, "confirmPassword");
