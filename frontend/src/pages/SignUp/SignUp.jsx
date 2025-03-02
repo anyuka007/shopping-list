@@ -183,6 +183,7 @@ const SignUp = () => {
                             <input
                                 type="text"
                                 name="email"
+                                autoComplete="email"
                                 id="email"
                                 placeholder="example@mail.com"
                                 value={formData.email}
@@ -206,11 +207,7 @@ const SignUp = () => {
                                 name="password"
                                 id="password"
                                 placeholder="********"
-                                // autoComplete="off"
-                                readOnly
-                                onFocus={(e) => {
-                                    e.target.removeAttribute("readonly");
-                                }}
+                                autoComplete="password"
                                 value={formData.password}
                                 onChange={(event) => {
                                     inputHandler(event, "password");
@@ -244,11 +241,6 @@ const SignUp = () => {
                                 name="confirmpassword"
                                 id="confirmpassword"
                                 placeholder="********"
-                                // autoComplete="off"
-                                readOnly
-                                onFocus={(e) => {
-                                    e.target.removeAttribute("readonly");
-                                }}
                                 value={formData.confirmPassword}
                                 onChange={(event) => {
                                     inputHandler(event, "confirmPassword");
