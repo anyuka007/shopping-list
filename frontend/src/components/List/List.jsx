@@ -35,6 +35,7 @@ const List = ({ list, setUserLists }) => {
     useEffect(() => {
         const handleResize = () => {
             const isLarge = window.innerWidth >= 768;
+            console.log("aaaaa", isLarge)
             setIsLargeScreen(isLarge);
             setWholeList(isLarge);
         };
