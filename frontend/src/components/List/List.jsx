@@ -35,14 +35,15 @@ const List = ({ list, setUserLists }) => {
     useEffect(() => {
         const handleResize = () => {
             const isLarge = window.innerWidth >= 768;
-            console.log("aaaaa", isLarge)
+            //console.log("aaaaa", isLarge)
             setIsLargeScreen(isLarge);
             setWholeList(isLarge);
         };
 
-        window.addEventListener("resize", handleResize);
+        //window.addEventListener("resize", handleResize);
+         handleResize();
         return () => {
-            window.removeEventListener("resize", handleResize);
+            //window.removeEventListener("resize", handleResize);
         };
     }, []);
 
