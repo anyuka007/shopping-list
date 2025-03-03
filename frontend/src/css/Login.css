@@ -61,7 +61,7 @@
 .login-input-container input {
     border: none;
     width: 90%;
-    background-color: #fffcf7;
+    background-color: inherit;
 }
 
 @media screen and (min-width: 768px) {

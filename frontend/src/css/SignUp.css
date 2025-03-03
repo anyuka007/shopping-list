@@ -59,7 +59,7 @@
     height: 4rem; */
     border: none;
     width: 90%;
-    background-color: #fffcf7;
+    background-color: inherit;
 }
 
 .signup-input-field input:focus {
