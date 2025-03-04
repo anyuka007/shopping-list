@@ -30,23 +30,21 @@ const List = ({ list, setUserLists }) => {
     const newItemInputRef = useRef(null);
 
     const token = localStorage.getItem("token");
-    const windowWidth = window.innerWidth;
 
     // Handle window resize to update component's state based on the window's width
     useEffect(() => {
         const handleResize = () => {
-            const isLarge = windowWidth >= 768;
-            //console.log("aaaaa", isLarge)
+            const isLarge = window.innerWidth >= 768;
             setIsLargeScreen(isLarge);
             setWholeList(isLarge);
         };
 
-        //window.addEventListener("resize", handleResize);
-         handleResize();
+        window.addEventListener("resize", handleResize);
+        handleResize();
         return () => {
-            //window.removeEventListener("resize", handleResize);
+            window.removeEventListener("resize", handleResize);
         };
-    }, [windowWidth]);
+    }, []);
 
     // *** Handling click outside the input field
 
