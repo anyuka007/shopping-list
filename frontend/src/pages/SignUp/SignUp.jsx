@@ -16,6 +16,7 @@ const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [validationErrors, setValidationErrors] = useState({});
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const inputHandler = (event, property) => {
@@ -113,12 +114,15 @@ const SignUp = () => {
 
         // Check if there are no errors
         if (Object.keys(errors).length === 0) {
+            setLoading(true);            
             const userCreated = await createUser();
+            
             if (userCreated) {
                 await loginUser(formData.email, formData.password);
-                navigate("/");
+                await navigate("/");
             }
         }
+        setLoading(false);
     };
 
     return (
@@ -270,6 +274,7 @@ const SignUp = () => {
                         className="signup-container-button"
                         onClickHandler={createUserHandler}
                         text="Create Account"
+                        loading={loading}
                     />
                     <div>
                         <p>
