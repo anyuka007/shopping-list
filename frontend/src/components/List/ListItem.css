@@ -51,11 +51,11 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    gap:1rem;
     width: 25%;
 }
 
 .list-item-container-right .list-item-icon {
-    margin-left: 1rem;
     width: 2rem;
     cursor: pointer;
     color: #888;

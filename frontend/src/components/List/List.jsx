@@ -15,6 +15,7 @@ import { fetchUsersLists } from "../../utils/fetchLists.js";
 import { isTokenValid } from "../../utils/checkToken.js";
 import { useLogout } from "../../utils/useLogout.js";
 import { fetchList } from "../../utils/fetchList.js";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
 
 const isScreenLarge = window.innerWidth >= 768;
 
@@ -28,6 +29,7 @@ const List = ({ list, setUserLists }) => {
     const [isLargeScreen, setIsLargeScreen] = useState(isScreenLarge);
     const logout = useLogout();
     const newItemInputRef = useRef(null);
+    const [loading, setLoading] = useState({list: false, item: false});
 
     const token = localStorage.getItem("token");
 
@@ -79,6 +81,8 @@ const List = ({ list, setUserLists }) => {
     };
 
     const saveNewNameHandler = async () => {
+        setLoading({list: true});
+        try {   
         await editListName();
         /* const updatedLists = await fetchUsersLists(); setUserLists(updatedLists);*/
         const updatedList = await fetchList(list._id);
@@ -87,8 +91,13 @@ const List = ({ list, setUserLists }) => {
                 li._id === updatedList._id ? updatedList : li
             )
         );
-
         setEditMode(false);
+        }
+        catch (error) {
+            console.error("Error editing list name:", error);
+        } finally {
+            setLoading({list:false});
+        }
     };
 
     const editListName = async () => {
@@ -121,9 +130,16 @@ const List = ({ list, setUserLists }) => {
     // *** Deleting List
 
     const deleteHandler = async () => {
+        setLoading({list: true});
+        try {
         await deleteList();
         const updatedLists = await fetchUsersLists();
         setUserLists(updatedLists);
+        } catch (error) {   
+            console.error("Error deleting list:", error);
+        } finally {
+            setLoading({list:false});
+        }
     };
 
     const deleteList = async () => {
@@ -161,6 +177,8 @@ const List = ({ list, setUserLists }) => {
         if (!newItemName) {
             setError("Please fill this field");
         } else {
+            setLoading({item:true});
+            try {
             await addNewItem();
             const updatedList = await fetchList(list._id);
             setNewItemName("");
@@ -169,6 +187,12 @@ const List = ({ list, setUserLists }) => {
                     li._id === updatedList._id ? updatedList : li
                 )
             );
+        } catch (error) {
+            console.error("Error adding new item:", error);
+        }
+        finally {
+            setLoading({item:false});
+        }
         }
     };
 
@@ -282,17 +306,23 @@ const List = ({ list, setUserLists }) => {
                                                 }
                                             }}
                                         />
+                                        {loading.list ? (
+              <LoadingSpinner color="#fefaf3" size={20} />
+            ) : (
                                         <Trash2
                                             className="list-icon"
                                             onClick={deleteHandler}
-                                        />{" "}
+                                        />)}
                                     </>
                                 ) : (
                                     <>
+                                        {loading.list ? (
+              <LoadingSpinner color="#fefaf3" size={20} />
+            ) : (
                                         <Check
                                             className="list-item-icon"
                                             onClick={saveNewNameHandler}
-                                        />
+                                        />)}
                                         <X
                                             className="list-item-icon"
                                             onClick={() => setEditMode(false)}
@@ -313,10 +343,11 @@ const List = ({ list, setUserLists }) => {
                                     if (e.key === "Enter") addNewItemHandler();
                                 }}
                             />
+                            {loading.item ? <LoadingSpinner color="#84a59d" size={20}/> : 
                             <Plus
                                 className="plus-icon"
                                 onClick={addNewItemHandler}
-                            />
+                            />}
                         </div>
                         {error && (
                             <p className="input-validation-error">{error}</p>

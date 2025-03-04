@@ -11,6 +11,7 @@ const NewList = ({ setUserLists }) => {
     const [error, setError] = useState("");
     const newListNameInputRef = useRef(null);
     const logout = useLogout();
+    const [ loading, setLoading ] = useState(false);
 
     useEffect(() => {
         document.addEventListener("mousedown", handleClickOutside);
@@ -37,7 +38,8 @@ const NewList = ({ setUserLists }) => {
     const createListHandler = async () => {
         if (!listTitle) {
             setError("Fill in this field");
-        } else {
+        } else {            
+            setLoading(true);
             try {
                 await createList();
                 const updatedLists = await fetchUsersLists();
@@ -46,8 +48,9 @@ const NewList = ({ setUserLists }) => {
             } catch (error) {
                 console.error("Error creating list:", error);
                 setError("Unable to create list");
-            }
-        }
+            } finally {
+                setLoading(false);
+        }}
     };
 
     const createList = async () => {
@@ -79,8 +82,7 @@ const NewList = ({ setUserLists }) => {
         } else if (!response.ok) {
             const errorData = await response.json();
             throw new Error(errorData.message || "Error creating list");
-        }
-
+        }        
         return await data;
     };
 
@@ -104,10 +106,9 @@ const NewList = ({ setUserLists }) => {
             </div>
             <div className="new-list-button-container">
                 <Button
-                    text="Create New List"
-                    /* width="250px" */
-                    /* fontSize="16px" */
+                    text="Create List"
                     onClickHandler={createListHandler}
+                    loading={loading}
                 />
             </div>
         </div>

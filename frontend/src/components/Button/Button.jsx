@@ -1,7 +1,7 @@
-// eslint-disable-next-line react/prop-types
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import "./Button.css";
-
-const Button = ({ text, width, height, fontSize, onClickHandler }) => {
+// eslint-disable-next-line react/prop-types
+const Button = ({ text, width, height, fontSize, onClickHandler, loading }) => {
     return (
         <button
             className="button-component"
@@ -11,8 +11,8 @@ const Button = ({ text, width, height, fontSize, onClickHandler }) => {
                 fontSize: fontSize || "1.6rem",
             }}
             onClick={onClickHandler}
-        >
-            {text}
+            disabled={loading}>
+        {loading ? <LoadingSpinner color="var(--primaryColor)" size={25} /> : text}
         </button>
     );
 };
