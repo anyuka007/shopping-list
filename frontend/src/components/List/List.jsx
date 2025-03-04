@@ -33,10 +33,15 @@ const List = ({ list, setUserLists }) => {
 
     // Handle window resize to update component's state based on the window's width
     useEffect(() => {
+        let prevWidth = window.innerWidth;
         const handleResize = () => {
-            const isLarge = window.innerWidth >= 768;
-            setIsLargeScreen(isLarge);
-            setWholeList(isLarge);
+            const currentWidth = window.innerWidth;
+            if (prevWidth !== currentWidth) {
+                const isLarge = window.innerWidth >= 768;
+                setIsLargeScreen(isLarge);
+                setWholeList(isLarge);
+                prevWidth = currentWidth
+            }
         };
 
         window.addEventListener("resize", handleResize);
