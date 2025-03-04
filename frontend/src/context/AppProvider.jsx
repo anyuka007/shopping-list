@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 
-const AppContext = React.createContext();
+export const AppContext = React.createContext();
 
+// eslint-disable-next-line react/prop-types
 const AppProvider = ({ children }) => {
-    return <AppContext.Provider value={{}}>{children}</AppContext.Provider>;
+    const [loading, setLoading] = useState(true);
+    return <AppContext.Provider value={{loading, setLoading}}>{children}</AppContext.Provider>;
 };
 
 export default AppProvider;
