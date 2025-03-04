@@ -40,7 +40,7 @@ const List = ({ list, setUserLists }) => {
                 const isLarge = window.innerWidth >= 768;
                 setIsLargeScreen(isLarge);
                 setWholeList(isLarge);
-                prevWidth = currentWidth
+                prevWidth = currentWidth;
             }
         };
 
