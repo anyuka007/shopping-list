@@ -7,6 +7,7 @@ import { isTokenValid } from "../../utils/checkToken";
 import { useLogout } from "../../utils/useLogout";
 import { fetchList } from "../../utils/fetchList";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import { API_URL } from "../../utils/constants";
 
 const ListItem = ({ item, setUserLists, list }) => {
   const [editMode, setEditMode] = useState(false);
@@ -73,7 +74,7 @@ const ListItem = ({ item, setUserLists, list }) => {
       }),
     };
     const response = await fetch(
-      `https://shoppinglist-ap.onrender.com/items/${listId}`,
+      `${API_URL}/items/${listId}`,
       requestOptions
     );
     const data = await response.json();
@@ -117,7 +118,7 @@ const ListItem = ({ item, setUserLists, list }) => {
       }),
     };
     const response = await fetch(
-      `https://shoppinglist-ap.onrender.com/items/${listId}`,
+      `${API_URL}/items/${listId}`,
       requestOptions
     );
 

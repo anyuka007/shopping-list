@@ -1,3 +1,5 @@
+import { API_URL } from "./constants";
+
 export const fetchUsersLists = async () => {
     const token = localStorage.getItem("token");
     try {
@@ -9,7 +11,7 @@ export const fetchUsersLists = async () => {
             },
         };
         const response = await fetch(
-            `https://shoppinglist-ap.onrender.com/shoppinglist/`,
+            `${API_URL}/shoppinglist/`,
             requestOptions
         );
 

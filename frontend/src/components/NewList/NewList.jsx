@@ -4,6 +4,7 @@ import { isTokenValid } from "../../utils/checkToken";
 import { fetchUsersLists } from "../../utils/fetchLists";
 import Button from "../Button/Button";
 import { useLogout } from "../../utils/useLogout";
+import { API_URL } from "../../utils/constants";
 
 // eslint-disable-next-line react/prop-types
 const NewList = ({ setUserLists }) => {
@@ -72,7 +73,7 @@ const NewList = ({ setUserLists }) => {
             }),
         };
         const response = await fetch(
-            "https://shoppinglist-ap.onrender.com/shoppinglist",
+            `${API_URL}/shoppinglist`,
             requestOptions
         );
         const data = await response.json();

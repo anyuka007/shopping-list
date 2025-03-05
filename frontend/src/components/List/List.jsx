@@ -16,6 +16,7 @@ import { isTokenValid } from "../../utils/checkToken.js";
 import { useLogout } from "../../utils/useLogout.js";
 import { fetchList } from "../../utils/fetchList.js";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner.jsx";
+import { API_URL } from "../../utils/constants.js";
 
 const isScreenLarge = window.innerWidth >= 768;
 
@@ -116,7 +117,7 @@ const List = ({ list, setUserLists }) => {
             }),
         };
         const response = await fetch(
-            `https://shoppinglist-ap.onrender.com/shoppinglist/${listId}`,
+            `${API_URL}/shoppinglist/${listId}`,
             requestOptions
         );
         const data = await response.json();
@@ -155,7 +156,7 @@ const List = ({ list, setUserLists }) => {
             },
         };
         const response = await fetch(
-            `https://shoppinglist-ap.onrender.com/shoppinglist/${listId}`,
+            `${API_URL}/shoppinglist/${listId}`,
             requestOptions
         );
         const data = await response.json();
@@ -217,7 +218,7 @@ const List = ({ list, setUserLists }) => {
             }),
         };
         const response = await fetch(
-            `https://shoppinglist-ap.onrender.com/shoppinglist/${listId}`,
+            `${API_URL}/shoppinglist/${listId}`,
             requestOptions
         );
         const data = await response.json();

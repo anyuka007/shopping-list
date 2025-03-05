@@ -4,6 +4,7 @@ import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import { loginUser } from "../../utils/login";
+import { API_URL } from "../../utils/constants";
 
 const SignUp = () => {
     const [formData, setFormData] = useState({
@@ -40,7 +41,7 @@ const SignUp = () => {
         };
         try {
             const response = await fetch(
-                "https://shoppinglist-ap.onrender.com/register",
+                `${API_URL}/register`,
                 requestOptions
             );
             const data = await response.json();

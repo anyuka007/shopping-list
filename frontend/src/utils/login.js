@@ -11,7 +11,7 @@ export const loginUser = async (email, password) => {
     };
     try {
         const response = await fetch(
-            `${API_URL}login`,
+            `${API_URL}/login`,
             requestOptions
         );
         const data = await response.json();
