@@ -1,3 +1,5 @@
+import { API_URL } from "./constants";
+
 export const loginUser = async (email, password) => {
     const requestOptions = {
         method: "POST",
@@ -9,7 +11,7 @@ export const loginUser = async (email, password) => {
     };
     try {
         const response = await fetch(
-            "https://shoppinglist-ap.onrender.com/login",
+            `${API_URL}login`,
             requestOptions
         );
         const data = await response.json();
