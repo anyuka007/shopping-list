@@ -176,9 +176,13 @@ const List = ({ list, setUserLists }) => {
     const addNewItemHandler = async () => {
         if (!newItemName) {
             setError("Please fill this field");
-        } else {
-            setLoading({item:true});
-            try {
+            return;
+        }
+        if (loading.item) {
+            return;
+        }
+        setLoading({item:true});
+        try {
             await addNewItem();
             const updatedList = await fetchList(list._id);
             setNewItemName("");
@@ -192,7 +196,6 @@ const List = ({ list, setUserLists }) => {
         }
         finally {
             setLoading({item:false});
-        }
         }
     };
 

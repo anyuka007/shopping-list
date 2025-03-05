@@ -38,19 +38,22 @@ const NewList = ({ setUserLists }) => {
     const createListHandler = async () => {
         if (!listTitle) {
             setError("Fill in this field");
-        } else {            
-            setLoading(true);
-            try {
-                await createList();
-                const updatedLists = await fetchUsersLists();
-                setUserLists(updatedLists);
-                setListTitle("");
-            } catch (error) {
-                console.error("Error creating list:", error);
-                setError("Unable to create list");
-            } finally {
+            return
+        }  
+        if(loading) {
+            return}  
+        setLoading(true);
+        try {
+            await createList();
+            const updatedLists = await fetchUsersLists();
+            setUserLists(updatedLists);
+            setListTitle("");
+        } catch (error) {
+            console.error("Error creating list:", error);
+            setError("Unable to create list");
+        } finally {
                 setLoading(false);
-        }}
+            }
     };
 
     const createList = async () => {
