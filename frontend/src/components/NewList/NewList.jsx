@@ -1,10 +1,10 @@
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import "./NewList.css";
-import { isTokenValid } from "../../utils/checkToken";
 import { fetchUsersLists } from "../../utils/fetchLists";
 import Button from "../Button/Button";
 import { useLogout } from "../../utils/useLogout";
-import { API_URL } from "../../utils/constants";
+import { createList } from "../../utils/listAPI";
+import useClickOutside from "../../utils/useClickOutside";
 
 // eslint-disable-next-line react/prop-types
 const NewList = ({ setUserLists }) => {
@@ -14,22 +14,9 @@ const NewList = ({ setUserLists }) => {
     const logout = useLogout();
     const [ loading, setLoading ] = useState(false);
 
-    useEffect(() => {
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, []);
-
-    //function checks if the click event occurred outside of the input field referenced by newListNameInputRef
-    const handleClickOutside = (event) => {
-        if (
-            newListNameInputRef.current &&
-            !newListNameInputRef.current.contains(event.target)
-        ) {
-            setError("");
-        }
-    };
+    
+    // Use the custom hook to handle click outside the input field
+    useClickOutside(newListNameInputRef, () => setError(""));
 
     const inputHandler = (event) => {
         setError("");
@@ -45,10 +32,11 @@ const NewList = ({ setUserLists }) => {
             return}  
         setLoading(true);
         try {
-            await createList();
-            const updatedLists = await fetchUsersLists();
+            const response = await createList(logout, listTitle, setError);
+            if (response) 
+            {const updatedLists = await fetchUsersLists();
             setUserLists(updatedLists);
-            setListTitle("");
+            setListTitle("");}
         } catch (error) {
             console.error("Error creating list:", error);
             setError("Unable to create list");
@@ -57,39 +45,7 @@ const NewList = ({ setUserLists }) => {
             }
     };
 
-    const createList = async () => {
-        const token = localStorage.getItem("token");
-        if (!token || !isTokenValid(token)) {
-            logout();
-        }
-        const requestOptions = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-                title: listTitle,
-            }),
-        };
-        const response = await fetch(
-            `${API_URL}/shoppinglist`,
-            requestOptions
-        );
-        const data = await response.json();
-        if (
-            response.status === 409 &&
-            data.message === "List with such title already exists"
-        ) {
-            setError("List with such title exists");
-            return;
-        } else if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || "Error creating list");
-        }        
-        return await data;
-    };
-
+    
     return (
         <div className="new-list-container">
             <div className="new-list-name">

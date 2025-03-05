@@ -3,11 +3,10 @@ import { Pencil, Trash2, Check, X } from "lucide-react";
 import "./ListItem.css";
 import { useState } from "react";
 //import { fetchUsersLists } from "../../utils/fetchLists";
-import { isTokenValid } from "../../utils/checkToken";
 import { useLogout } from "../../utils/useLogout";
 import { fetchList } from "../../utils/fetchList";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
-import { API_URL } from "../../utils/constants";
+import { deleteItem, editItem } from "../../utils/itemAPI";
 
 const ListItem = ({ item, setUserLists, list }) => {
   const [editMode, setEditMode] = useState(false);
@@ -17,12 +16,11 @@ const ListItem = ({ item, setUserLists, list }) => {
   const [loading, setLoading] = useState(false);
 
   const itemIndex = list.items.indexOf(item);
-  const token = localStorage.getItem("token");
 
   const checkboxChangeHandler = async (e) => {
     const newCheckedState = e.target.checked;
 
-    await editItem({ isChecked: newCheckedState });
+    await editItem({ isChecked: newCheckedState }, list, logout, itemIndex);
     /* const updatedLists = await fetchUsersLists();
         setUserLists(updatedLists); */
     const updatedList = await fetchList(list._id);
@@ -42,7 +40,7 @@ const ListItem = ({ item, setUserLists, list }) => {
     }
     setLoading(true);
     try {
-      await editItem({ newName: newName });
+      await editItem({ newName: newName }, list, logout, itemIndex);
       /* const updatedLists = await fetchUsersLists();
         setUserLists(updatedLists); */
       const updatedList = await fetchList(list._id);
@@ -56,39 +54,13 @@ const ListItem = ({ item, setUserLists, list }) => {
       setLoading(false);
     }
   };
-
-  const editItem = async (changes) => {
-    const listId = list._id;
-    if (!token || !isTokenValid(token)) {
-      logout();
-    }
-    const requestOptions = {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        itemIndex: itemIndex,
-        ...changes,
-      }),
-    };
-    const response = await fetch(
-      `${API_URL}/items/${listId}`,
-      requestOptions
-    );
-    const data = await response.json();
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "Error editing list");
-    }
-    return data;
-  };
+  
 
   const deleteItemHandler = async () => {
     setLoading(true);
     try {
-      await deleteItem();
+      await deleteItem(list, logout, itemIndex
+      );
       /* const updatedLists = await fetchUsersLists();
         setUserLists(updatedLists); */
       const updatedList = await fetchList(list._id);
@@ -101,34 +73,7 @@ const ListItem = ({ item, setUserLists, list }) => {
       setLoading(false);
     }
   };
-
-  const deleteItem = async () => {
-    const listId = list._id;
-    if (!token || !isTokenValid(token)) {
-      logout();
-    }
-    const requestOptions = {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        itemIndex: itemIndex,
-      }),
-    };
-    const response = await fetch(
-      `${API_URL}/items/${listId}`,
-      requestOptions
-    );
-
-    const data = await response.json();
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || "Error deleting item");
-    }
-    return data;
-  };
+  
 
   return (
     <div className="list-item-container">
