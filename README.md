@@ -1,6 +1,19 @@
 # Shopping List
 
-This project is a simple shopping list application that helps users keep track of items they need to purchase. It allows users to add, edit, and delete items from their shopping list.
+This project is a simple shopping list application that helps users keep track of items they need to purchase. It allows users to add, edit, and delete items from their shopping list.  
+It features user authentication, allowing each user to log in and access their own personalized shopping list data.
+
+🚀 Try it now https://ap-shoppinglist.onrender.com/ – Use AP Lists in your browser. 
+
+---
+
+## Screenshots
+![1](https://github.com/user-attachments/assets/c175b799-6911-447f-ba12-53455d4d9862)
+![2](https://github.com/user-attachments/assets/c92964d7-46a3-44b5-92c3-6724b3260302)
+![AP Lists](https://github.com/user-attachments/assets/6bbe5a79-cb3f-483f-b05c-776ba6a2dd12)
+
+
+---
 
 ## Features
 
